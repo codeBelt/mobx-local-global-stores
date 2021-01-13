@@ -1,0 +1,1 @@
+mobx-local-global-stores
