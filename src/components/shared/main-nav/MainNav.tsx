@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
-import { MenuNavLink } from './components/MenuNavLink';
+import { MenuNavLink } from './MenuNavLink';
 import { Routes, RoutesDynamicKey } from '../../../constants/Routes';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import { useRouter } from 'next/router';
