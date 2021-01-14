@@ -10,7 +10,7 @@ export type ResponseStatus<T, E = IApiError> = Omit<SuccessfulResponse<T>, 'erro
  */
 export const initialResponseStatus = <T, E = IApiError>(
   defaultValue: T,
-  defaultIsRequesting = false
+  defaultIsRequesting = true
 ): ResponseStatus<T, E> => {
   return {
     isRequesting: defaultIsRequesting,

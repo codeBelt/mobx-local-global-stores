@@ -2,12 +2,12 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiResponse, IApiError } from './http.types';
 import { HttpVerbs } from './http.constants';
 
-const httpRequest = async <T, E = IApiError>(
+const httpRequest = async <T>(
   method: HttpVerbs,
   url: string,
   paramsOrData?: any,
   config?: AxiosRequestConfig
-): Promise<ApiResponse<T>> => {
+): Promise<ApiResponse<T, IApiError>> => {
   const requestConfig: AxiosRequestConfig = {
     ...config,
     url,
