@@ -32,7 +32,7 @@ export const MainNav: React.FC<IProps> = observer((props) => {
           <Grid.Column textAlign="right">
             <Button as="div" labelPosition="left">
               <Label basic={true} pointing="right">
-                {authStore.authResults.data}
+                {authStore.userFullName}
               </Label>
               <Button icon={true} onClick={() => authStore.signOut()}>
                 Sign Out <Icon name="share square outline" />
