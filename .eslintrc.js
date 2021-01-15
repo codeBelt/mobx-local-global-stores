@@ -37,6 +37,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
     'newline-after-var': ['error', 'always'],
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    'react/jsx-boolean-value': [2, 'always'],
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     // Next.js use his own internal link system
