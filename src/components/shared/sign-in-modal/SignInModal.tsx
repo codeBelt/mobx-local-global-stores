@@ -12,9 +12,7 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
     <Modal closeOnDimmerClick={false} closeOnEscape={false} open={!authStore.isAuthenticated} size={'tiny'}>
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content>
-        <p>
-          You&apos;re username will be <b>Jamie Doe</b>
-        </p>
+        <p>Welcome, please sign in.</p>
       </Modal.Content>
       <Modal.Actions>
         <Button
