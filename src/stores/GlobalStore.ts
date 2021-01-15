@@ -5,8 +5,7 @@ import environment from 'environment';
 import { enableStaticRendering } from 'mobx-react-lite';
 import { AuthGlobalStore } from './auth/AuthGlobalStore';
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-enableStaticRendering(environment.isServer); // Not a react-hook
+enableStaticRendering(environment.isServer);
 configure({
   enforceActions: 'always',
   computedRequiresReaction: true,
