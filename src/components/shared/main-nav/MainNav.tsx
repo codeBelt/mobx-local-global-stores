@@ -4,11 +4,14 @@ import { MenuNavLink } from './MenuNavLink';
 import { Routes, RoutesDynamicKey } from '../../../constants/Routes';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import { useRouter } from 'next/router';
+import { useGlobalStore } from '../../../stores/GlobalStore.utils';
+import { observer } from 'mobx-react-lite';
 
 interface IProps {}
 
-export const MainNav: React.FC<IProps> = (props) => {
+export const MainNav: React.FC<IProps> = observer((props) => {
   const router = useRouter();
+  const { authStore } = useGlobalStore();
 
   return (
     <Segment inverted={true}>
@@ -25,7 +28,19 @@ export const MainNav: React.FC<IProps> = (props) => {
             <Menu.Item as={MenuNavLink} href={Routes.About} name="About" active={router.route === Routes.About} />
           </Menu>
         </Grid.Column>
+        {authStore.isAuthenticated && (
+          <Grid.Column textAlign="right">
+            <Button as="div" labelPosition="left">
+              <Label basic={true} pointing="right">
+                {authStore.authResults.data}
+              </Label>
+              <Button icon={true} onClick={() => authStore.signOut()}>
+                Sign Out <Icon name="share square outline" />
+              </Button>
+            </Button>
+          </Grid.Column>
+        )}
       </Grid>
     </Segment>
   );
-};
+});
