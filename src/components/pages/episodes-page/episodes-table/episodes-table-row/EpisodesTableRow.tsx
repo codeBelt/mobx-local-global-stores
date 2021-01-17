@@ -1,12 +1,13 @@
 import React from 'react';
 import { Image, Table } from 'semantic-ui-react';
 import { IEpisodeTableRow } from '../../../../../domains/shows/shows.types';
+import { observer } from 'mobx-react-lite';
 
 interface IProps {
   readonly rowData: IEpisodeTableRow;
 }
 
-export const EpisodesTableRow: React.FC<IProps> = (props) => {
+export const EpisodesTableRow: React.FC<IProps> = observer((props) => {
   return (
     <Table.Row key={props.rowData.episode}>
       <Table.Cell>
@@ -17,4 +18,4 @@ export const EpisodesTableRow: React.FC<IProps> = (props) => {
       <Table.Cell>{props.rowData.name}</Table.Cell>
     </Table.Row>
   );
-};
+});

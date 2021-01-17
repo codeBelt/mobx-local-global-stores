@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import { useGlobalStore } from '../../../stores/GlobalStore.utils';
+import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
 
 export interface IProps {}

@@ -5,6 +5,7 @@ import { ApiResponse } from '../../utils/http/http.types';
 import { initialResponseStatus } from '../../utils/mobx.utils';
 import { Routes } from '../../constants/Routes';
 import { IUser, IUserResponse } from '../../domains/auth/auth.types';
+import Router from 'next/router';
 
 export const AuthGlobalStore = (globalStore: GlobalStore) =>
   observable({
@@ -45,7 +46,7 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
     signOut() {
       this.authResults.data = null;
 
-      globalStore.router.push(Routes.Index);
+      Router.router?.push(Routes.Index);
     },
   });
 

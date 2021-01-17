@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 import { getErrorRequest } from '../../../domains/shows/shows.services';
 import { initialResponseStatus } from '../../../utils/mobx.utils';
 import { ApiResponse } from '../../../utils/http/http.types';
-import { getGlobalStore } from '../../../stores/GlobalStore.utils';
+import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 
 export const AboutPageStore = () =>
   observable({

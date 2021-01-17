@@ -5,7 +5,8 @@ import groupBy from 'lodash.groupby';
 import { IEpisode, IEpisodeTable } from '../../../domains/shows/shows.types';
 import dayjs from 'dayjs';
 import { ApiResponse } from '../../../utils/http/http.types';
-import { getGlobalStore } from '../../../stores/GlobalStore.utils';
+import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
+import Router from 'next/router';
 
 export const EpisodesPageStore = () =>
   observable({
@@ -40,8 +41,8 @@ export const EpisodesPageStore = () =>
     },
 
     *loadEpisodes() {
-      const { episode_id } = this.globalStore.router.query;
-      const response: ApiResponse<IEpisode[]> = yield getEpisodesRequest(episode_id as string);
+      const episodeId = Router.router?.query.episode_id as string;
+      const response: ApiResponse<IEpisode[]> = yield getEpisodesRequest(episodeId);
 
       this.episodesResults = {
         ...this.episodesResults,

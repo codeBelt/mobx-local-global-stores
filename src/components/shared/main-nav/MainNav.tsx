@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { Routes, RoutesDynamicKey } from '../../../constants/Routes';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import { useRouter } from 'next/router';
-import { useGlobalStore } from '../../../stores/GlobalStore.utils';
+import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
 
 interface IProps {}

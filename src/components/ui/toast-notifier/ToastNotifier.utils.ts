@@ -1,4 +1,4 @@
-import { getGlobalStore } from '../../../stores/GlobalStore.utils';
+import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 
 export const toastSuccessMessage = (message: string): void => {
   getGlobalStore().toastStore.enqueueToast(message, 'success');
