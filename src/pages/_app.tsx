@@ -3,16 +3,13 @@ import '../css/main.scss';
 import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { observer } from 'mobx-react-lite';
 import { MainNav } from '../components/shared/main-nav/MainNav';
 import { SnackbarProvider } from 'notistack';
 import { ToastNotifier } from '../components/ui/toast-notifier/ToastNotifier';
-import { setupGlobalStore } from '../stores/GlobalStore.utils';
 import { SignInModal } from '../components/shared/sign-in-modal/SignInModal';
+import { GlobalStoreProvider } from '../components/shared/global-store-provider/GlobalStoreProvider';
 
-const NextApp: React.FC<AppProps> = observer((props) => {
-  setupGlobalStore(props.pageProps);
-
+const NextApp: React.FC<AppProps> = (props) => {
   return (
     <React.Fragment>
       <Head>
@@ -20,14 +17,17 @@ const NextApp: React.FC<AppProps> = observer((props) => {
         {/* Use minimum-scale=1 to enable GPU rasterization */}
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
       </Head>
-      <MainNav />
-      <props.Component {...props.pageProps} />
-      <SnackbarProvider>
-        <ToastNotifier />
-      </SnackbarProvider>
-      <SignInModal />
+
+      <GlobalStoreProvider hydrationData={props.pageProps}>
+        <SnackbarProvider>
+          <MainNav />
+          <props.Component {...props.pageProps} />
+          <ToastNotifier />
+          <SignInModal />
+        </SnackbarProvider>
+      </GlobalStoreProvider>
     </React.Fragment>
   );
-});
+};
 
 export default NextApp;

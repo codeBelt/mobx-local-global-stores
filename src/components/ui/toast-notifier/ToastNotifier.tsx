@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useGlobalStore } from '../../../stores/GlobalStore.utils';
+import { useGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 import { autorun } from 'mobx';
 import { OptionsObject, SnackbarAction, useSnackbar } from 'notistack';
 import { IToastNotification } from './ToastNotifier.types';
