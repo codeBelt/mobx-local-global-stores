@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { MainNav } from '../components/shared/main-nav/MainNav';
 import { SnackbarProvider } from 'notistack';
 import { ToastNotifier } from '../components/ui/toast-notifier/ToastNotifier';
-import { SignInModal } from '../components/shared/sign-in-modal/SignInModal';
+import { SignInModalDynamic } from '../components/shared/sign-in-modal/SignInModal.dynamic';
 import { GlobalStoreProvider } from '../components/shared/global-store-provider/GlobalStoreProvider';
 
 const NextApp: React.FC<AppProps> = (props) => {
@@ -23,7 +23,7 @@ const NextApp: React.FC<AppProps> = (props) => {
           <MainNav />
           <props.Component {...props.pageProps} />
           <ToastNotifier />
-          <SignInModal />
+          <SignInModalDynamic />
         </SnackbarProvider>
       </GlobalStoreProvider>
     </React.Fragment>

@@ -22,7 +22,7 @@ export default class GlobalStore {
     this.toastStore = ToastGlobalStore(this);
   }
 
-  hydrate(initialState?: Partial<GlobalStore>) {
+  async hydrate(initialState?: Partial<GlobalStore>) {
     // TODO: hydrate your global stores
   }
 }
