@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { LoadingIndicator } from '../../ui/loading-indicator/LoadingIndicator';
 import { Container, Header, Message } from 'semantic-ui-react';
 import { AboutPageStore } from './AboutPage.store';
 import { observer } from 'mobx-react-lite';
+import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
 
 interface IProps {}
 
 export const AboutPage: React.FC<IProps> = observer((props) => {
-  const [localStore] = useState(AboutPageStore());
-
-  useEffect(() => {
-    localStore.init();
-  }, [localStore]);
+  const localStore = useLocalStore<AboutPageStore>();
 
   return (
     <div>
