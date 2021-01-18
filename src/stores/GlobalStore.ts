@@ -11,6 +11,7 @@ configure({
   computedRequiresReaction: true,
   reactionRequiresObservable: true,
   observableRequiresReaction: true,
+  disableErrorBoundaries: true,
 });
 
 export default class GlobalStore {
@@ -22,7 +23,7 @@ export default class GlobalStore {
     this.toastStore = ToastGlobalStore(this);
   }
 
-  hydrate(initialState?: Partial<GlobalStore>) {
+  async hydrate(initialState?: Partial<GlobalStore>) {
     // TODO: hydrate your global stores
   }
 }

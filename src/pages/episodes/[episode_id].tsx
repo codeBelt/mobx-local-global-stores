@@ -8,4 +8,8 @@ const EpisodesRoute: NextPage<IProps> = (props) => {
   return <EpisodesPage />;
 };
 
+EpisodesRoute.getInitialProps = async (ctx) => {
+  return { query: ctx.query };
+};
+
 export default EpisodesRoute;

@@ -20,7 +20,7 @@ export const IndexPage: React.FC<IProps> = observer((props) => {
       <MainOverview localStore={localStore} />
       <Divider horizontal={true}>
         <Header as="h4">
-          <Icon name="users" /> Cast
+          <Icon name="users" /> Actors
         </Header>
       </Divider>
       <Actors localStore={localStore} />
