@@ -4,15 +4,25 @@ import { initialResponseStatus } from '../../../utils/mobx.utils';
 import { ICast, IShow } from '../../../domains/shows/shows.types';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
+import orderBy from 'lodash.orderby';
 
 export const IndexPageStore = () =>
   observable({
     // globalStore: getGlobalStore(),
+    sortValue: '',
     showResults: initialResponseStatus<IShow | null>(null),
     castsResults: initialResponseStatus<ICast[]>([]),
 
     get isRequesting(): boolean {
       return [this.showResults.isRequesting, this.castsResults.isRequesting].some(Boolean);
+    },
+
+    get actors(): ICast[] {
+      return orderBy(this.castsResults.data, (cast) => cast.person[this.sortValue], 'asc');
+    },
+
+    setSortOption(sortValue: string) {
+      this.sortValue = sortValue;
     },
 
     /**
