@@ -11,6 +11,7 @@ configure({
   computedRequiresReaction: true,
   reactionRequiresObservable: true,
   observableRequiresReaction: true,
+  disableErrorBoundaries: true,
 });
 
 export default class GlobalStore {
