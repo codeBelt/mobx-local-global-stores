@@ -22,11 +22,20 @@ const EpisodesRoute: NextPage<IProps> = observer((props) => {
   );
 });
 
-EpisodesRoute.getInitialProps = async (ctx: NextPageContext) => {
+export const getServerSideProps = async (ctx: NextPageContext) => {
   const episodeId = ctx.query.episode_id as string;
   const response = await getEpisodesRequest(episodeId);
 
-  return { episodesResults: response };
+  if (response.data) {
+    return {
+      props: {
+        episodesResults: response,
+      },
+    };
+  }
+
+  // return a 404 status and 404 page
+  return { notFound: true };
 };
 
 export default EpisodesRoute;
