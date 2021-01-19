@@ -2,10 +2,11 @@ import React from 'react';
 import { EpisodesPageStore } from './EpisodesPage.store';
 import { EpisodesTable } from './episodes-table/EpisodesTable';
 import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
+import { observer } from 'mobx-react-lite';
 
 export interface IProps {}
 
-export const EpisodesPage: React.FC<IProps> = (props) => {
+export const EpisodesPage: React.FC<IProps> = observer((props) => {
   const localStore = useLocalStore<EpisodesPageStore>();
 
   return (
@@ -15,7 +16,7 @@ export const EpisodesPage: React.FC<IProps> = (props) => {
       ))}
     </>
   );
-};
+});
 
 EpisodesPage.displayName = 'EpisodesPage';
 EpisodesPage.defaultProps = {};

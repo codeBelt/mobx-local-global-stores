@@ -6,12 +6,13 @@ import { EpisodesPageStore } from '../../components/pages/episodes-page/Episodes
 import { ApiResponse } from '../../utils/http/http.types';
 import { IEpisode } from '../../domains/shows/shows.types';
 import { getEpisodesRequest } from '../../domains/shows/shows.services';
+import { observer } from 'mobx-react-lite';
 
 interface IProps {
   episodesResults: ApiResponse<IEpisode[]>;
 }
 
-const EpisodesRoute: NextPage<IProps> = (props) => {
+const EpisodesRoute: NextPage<IProps> = observer((props) => {
   const [localStore] = useState(EpisodesPageStore(props.episodesResults));
 
   return (
@@ -19,7 +20,7 @@ const EpisodesRoute: NextPage<IProps> = (props) => {
       <EpisodesPage />
     </LocalStoreProvider>
   );
-};
+});
 
 EpisodesRoute.getInitialProps = async (ctx: NextPageContext) => {
   const episodeId = ctx.query.episode_id as string;
