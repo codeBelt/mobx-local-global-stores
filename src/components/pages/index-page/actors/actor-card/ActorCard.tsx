@@ -24,3 +24,6 @@ export const ActorCard: React.FC<IProps> = observer((props) => {
     </Card>
   );
 });
+
+ActorCard.displayName = 'ActorCard';
+ActorCard.defaultProps = {};

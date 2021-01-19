@@ -2,13 +2,14 @@ import React from 'react';
 import { Item } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
 import { IndexPageStore } from '../IndexPage.store';
+import { useLocalStore } from '../../../shared/local-store-provider/LocalStoreProvider';
 
-interface IProps {
-  localStore: IndexPageStore;
-}
+interface IProps {}
 
 export const MainOverview: React.FC<IProps> = observer((props) => {
-  const show = props.localStore.showResults.data;
+  const localStore = useLocalStore<IndexPageStore>();
+
+  const show = localStore.showResults.data;
   const image: string = show?.image?.medium ?? '';
   const network: string = show?.network?.name ?? '';
   const summary: string = show?.summary ?? '';
@@ -29,3 +30,6 @@ export const MainOverview: React.FC<IProps> = observer((props) => {
     </Item.Group>
   );
 });
+
+MainOverview.displayName = 'MainOverview';
+MainOverview.defaultProps = {};

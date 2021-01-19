@@ -44,3 +44,6 @@ export const ToastNotifier: React.FC<IProps> = (props) => {
 
   return null;
 };
+
+ToastNotifier.displayName = 'ToastNotifier';
+ToastNotifier.defaultProps = {};
