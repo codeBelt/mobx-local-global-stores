@@ -48,4 +48,5 @@ export const GlobalStoreProvider: React.FC<IProps> = (props) => {
   return <GlobalStoreContext.Provider value={_globalStore}>{props.children}</GlobalStoreContext.Provider>;
 };
 
+GlobalStoreProvider.displayName = 'GlobalStoreProvider';
 GlobalStoreProvider.defaultProps = {};

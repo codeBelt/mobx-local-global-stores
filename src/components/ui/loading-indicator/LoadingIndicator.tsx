@@ -25,6 +25,7 @@ export const LoadingIndicator: React.FC<IProps> = (props) => {
   );
 };
 
+LoadingIndicator.displayName = 'LoadingIndicator';
 LoadingIndicator.defaultProps = {
   isActive: false,
 };

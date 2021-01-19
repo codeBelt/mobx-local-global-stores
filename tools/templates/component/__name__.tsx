@@ -9,4 +9,5 @@ export const __name__: React.FC<IProps> = (props) => {
   return <div className={classes.root}>__name__(sentenceCase)</div>;
 };
 
+__name__.displayName = '__name__';
 __name__.defaultProps = {};

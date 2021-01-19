@@ -1,15 +1,32 @@
-import React from 'react';
-import { NextPage } from 'next';
+import React, { useState } from 'react';
+import { NextPage, NextPageContext } from 'next';
 import { EpisodesPage } from '../../components/pages/episodes-page/EpisodesPage';
+import { LocalStoreProvider } from '../../components/shared/local-store-provider/LocalStoreProvider';
+import { EpisodesPageStore } from '../../components/pages/episodes-page/EpisodesPage.store';
+import { ApiResponse } from '../../utils/http/http.types';
+import { IEpisode } from '../../domains/shows/shows.types';
+import { getEpisodesRequest } from '../../domains/shows/shows.services';
+import { observer } from 'mobx-react-lite';
 
-interface IProps {}
+interface IProps {
+  episodesResults: ApiResponse<IEpisode[]>;
+}
 
-const EpisodesRoute: NextPage<IProps> = (props) => {
-  return <EpisodesPage />;
-};
+const EpisodesRoute: NextPage<IProps> = observer((props) => {
+  const [localStore] = useState(EpisodesPageStore(props.episodesResults));
 
-EpisodesRoute.getInitialProps = async (ctx) => {
-  return { query: ctx.query };
+  return (
+    <LocalStoreProvider localStore={localStore}>
+      <EpisodesPage />
+    </LocalStoreProvider>
+  );
+});
+
+EpisodesRoute.getInitialProps = async (ctx: NextPageContext) => {
+  const episodeId = ctx.query.episode_id as string;
+  const response = await getEpisodesRequest(episodeId);
+
+  return { episodesResults: response };
 };
 
 export default EpisodesRoute;

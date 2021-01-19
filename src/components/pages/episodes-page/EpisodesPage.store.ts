@@ -1,17 +1,14 @@
 import { observable } from 'mobx';
-import { getEpisodesRequest } from '../../../domains/shows/shows.services';
-import { initialResponseStatus } from '../../../utils/mobx.utils';
 import groupBy from 'lodash.groupby';
 import { IEpisode, IEpisodeTable } from '../../../domains/shows/shows.types';
 import dayjs from 'dayjs';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
-import Router from 'next/router';
 
-export const EpisodesPageStore = () =>
+export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
   observable({
     globalStore: getGlobalStore(),
-    episodesResults: initialResponseStatus<IEpisode[]>([]),
+    episodesResults: episodesResults,
 
     get generateTableData(): IEpisodeTable[] {
       if (this.episodesResults.error) {
@@ -31,24 +28,6 @@ export const EpisodesPageStore = () =>
           })),
         };
       });
-    },
-
-    /**
-     * Store initializer. Should only be called once.
-     */
-    *init() {
-      yield Promise.all([this.loadEpisodes()]);
-    },
-
-    *loadEpisodes() {
-      const episodeId = Router.router?.query.episode_id as string;
-      const response: ApiResponse<IEpisode[]> = yield getEpisodesRequest(episodeId);
-
-      this.episodesResults = {
-        ...this.episodesResults,
-        ...response,
-        isRequesting: false,
-      };
     },
   });
 
