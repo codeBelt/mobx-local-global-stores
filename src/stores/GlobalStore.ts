@@ -8,10 +8,10 @@ enableStaticRendering(environment.isServer);
 // https://mobx.js.org/configuration.html#configuration-
 configure({
   enforceActions: 'always',
-  computedRequiresReaction: environment.isBrowser,
-  reactionRequiresObservable: environment.isBrowser,
-  observableRequiresReaction: environment.isBrowser,
-  disableErrorBoundaries: environment.isBrowser,
+  computedRequiresReaction: true,
+  reactionRequiresObservable: true,
+  observableRequiresReaction: true,
+  disableErrorBoundaries: true,
 });
 
 export default class GlobalStore {
