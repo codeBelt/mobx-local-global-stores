@@ -18,7 +18,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 const NextApp: React.FC<AppProps> = (props) => {
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>My Next.js Starter</title>
         {/* Use minimum-scale=1 to enable GPU rasterization */}
@@ -33,7 +33,7 @@ const NextApp: React.FC<AppProps> = (props) => {
           <SignInModalDynamic />
         </SnackbarProvider>
       </GlobalStoreProvider>
-    </React.Fragment>
+    </>
   );
 };
 
