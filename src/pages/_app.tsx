@@ -1,5 +1,8 @@
 import '../css/main.scss';
+import 'nprogress/nprogress.css';
 
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -8,6 +11,10 @@ import { SnackbarProvider } from 'notistack';
 import { ToastNotifier } from '../components/ui/toast-notifier/ToastNotifier';
 import { SignInModalDynamic } from '../components/shared/sign-in-modal/SignInModal.dynamic';
 import { GlobalStoreProvider } from '../components/shared/global-store-provider/GlobalStoreProvider';
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 const NextApp: React.FC<AppProps> = (props) => {
   return (

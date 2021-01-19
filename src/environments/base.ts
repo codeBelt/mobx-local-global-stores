@@ -15,7 +15,7 @@ export default function baseEnv(baseApi: string) {
     },
 
     isServer: typeof window === 'undefined',
-    isClient: typeof window !== 'undefined',
+    isBrowser: typeof window !== 'undefined',
     isDevelopment: process.env.NODE_ENV !== 'production',
     isProduction: process.env.NODE_ENV === 'production',
   };
