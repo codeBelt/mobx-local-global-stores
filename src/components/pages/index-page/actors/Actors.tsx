@@ -24,3 +24,6 @@ export const Actors: React.FC<IProps> = observer((props) => {
     </>
   );
 });
+
+Actors.displayName = 'Actors';
+Actors.defaultProps = {};

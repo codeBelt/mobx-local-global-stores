@@ -30,3 +30,6 @@ export const MainOverview: React.FC<IProps> = observer((props) => {
     </Item.Group>
   );
 });
+
+MainOverview.displayName = 'MainOverview';
+MainOverview.defaultProps = {};

@@ -18,4 +18,5 @@ export const ActorsSortOption: React.FC<IProps> = (props) => {
   );
 };
 
+ActorsSortOption.displayName = 'ActorsSortOption';
 ActorsSortOption.defaultProps = {};

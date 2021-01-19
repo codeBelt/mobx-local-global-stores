@@ -27,3 +27,6 @@ export const AboutPage: React.FC<IProps> = observer((props) => {
     </div>
   );
 });
+
+AboutPage.displayName = 'AboutPage';
+AboutPage.defaultProps = {};

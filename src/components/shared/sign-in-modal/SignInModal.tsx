@@ -29,4 +29,5 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
   );
 });
 
+SignInModal.displayName = 'SignInModal';
 SignInModal.defaultProps = {};

@@ -24,3 +24,6 @@ export const IndexPage: React.FC<IProps> = observer((props) => {
     </LoadingIndicator>
   );
 });
+
+IndexPage.displayName = 'IndexPage';
+IndexPage.defaultProps = {};

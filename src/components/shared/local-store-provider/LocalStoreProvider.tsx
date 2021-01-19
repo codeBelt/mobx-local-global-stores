@@ -24,4 +24,5 @@ export const LocalStoreProvider = <T extends unknown>(props: React.PropsWithChil
   );
 };
 
+LocalStoreProvider.displayName = 'LocalStoreProvider';
 LocalStoreProvider.defaultProps = {};

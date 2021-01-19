@@ -45,3 +45,6 @@ export const MainNav: React.FC<IProps> = observer((props) => {
     </Segment>
   );
 });
+
+MainNav.displayName = 'MainNav';
+MainNav.defaultProps = {};

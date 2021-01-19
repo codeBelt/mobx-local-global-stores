@@ -29,3 +29,6 @@ export const EpisodesTable: React.FC<IProps> = (props) => {
     </div>
   );
 };
+
+EpisodesTable.displayName = 'EpisodesTable';
+EpisodesTable.defaultProps = {};
