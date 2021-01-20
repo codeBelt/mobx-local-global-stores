@@ -31,7 +31,7 @@ export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
             episode: model.number,
             name: model.name,
             date: dayjs(model.airdate).format('MMM D, YYYY'),
-            image: model.image.medium,
+            image: model.image?.medium ?? '',
           })),
         };
       });
