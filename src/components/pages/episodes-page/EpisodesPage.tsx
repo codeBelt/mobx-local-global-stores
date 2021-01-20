@@ -3,6 +3,8 @@ import { EpisodesPageStore } from './EpisodesPage.store';
 import { EpisodesTable } from './episodes-table/EpisodesTable';
 import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
 import { observer } from 'mobx-react-lite';
+import { Container } from 'semantic-ui-react';
+import { EpisodesToggle } from './episodes-toggle/EpisodesToggle';
 
 export interface IProps {}
 
@@ -11,7 +13,10 @@ export const EpisodesPage: React.FC<IProps> = observer((props) => {
 
   return (
     <>
-      {localStore.generateTableData.map((model) => (
+      <Container textAlign="right" fluid={true}>
+        <EpisodesToggle />
+      </Container>
+      {localStore.sortedTableData.map((model) => (
         <EpisodesTable key={model.title} tableData={model} />
       ))}
     </>

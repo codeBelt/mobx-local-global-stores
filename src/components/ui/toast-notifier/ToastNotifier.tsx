@@ -21,9 +21,10 @@ export const ToastNotifier: React.FC<IProps> = (props) => {
   autorun(() => {
     toastStore.notifications.forEach((notification: IToastNotification) => {
       const shapedOptions: OptionsObject = {
-        anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
-        disableWindowBlurListener: true,
         action,
+        anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+        autoHideDuration: 3000,
+        disableWindowBlurListener: true,
         variant: notification.options.variant,
       };
       const key = notification.options.key as string;
