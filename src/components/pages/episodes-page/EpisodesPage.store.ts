@@ -1,14 +1,21 @@
 import { observable } from 'mobx';
 import groupBy from 'lodash.groupby';
+import orderBy from 'lodash.orderby';
 import { IEpisode, IEpisodeTable } from '../../../domains/shows/shows.types';
 import dayjs from 'dayjs';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
+import { EpisodesToggleOption } from './episodes-toggle/EpisodesToggle.constants';
 
 export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
   observable({
     globalStore: getGlobalStore(),
+    sortType: EpisodesToggleOption.ASC,
     episodesResults: episodesResults,
+
+    get sortedTableData(): IEpisodeTable[] {
+      return orderBy(this.generateTableData, 'title', this.sortType);
+    },
 
     get generateTableData(): IEpisodeTable[] {
       if (this.episodesResults.error) {
@@ -24,10 +31,16 @@ export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
             episode: model.number,
             name: model.name,
             date: dayjs(model.airdate).format('MMM D, YYYY'),
-            image: model.image.medium,
+            image: model.image?.medium ?? '',
           })),
         };
       });
+    },
+
+    setSortType(sortType: EpisodesToggleOption) {
+      this.sortType = sortType;
+
+      this.globalStore.toastStore.enqueueToast('Nice! You just sorted Server-Side Rendered Content.', 'info');
     },
   });
 
