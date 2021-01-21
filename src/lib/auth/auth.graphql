@@ -11,10 +11,11 @@ query Auth {
   }
 }
 
-# mutation SignIn() {
-#   signIn() {
-#     isAuthenticated
-#     # user
-#     # userFullName
-#   }
-# }
+mutation SignIn($name: String) {
+  signIn(name: $name) {
+    isAuthenticated
+    # user
+    # userFullName
+  }
+}
+

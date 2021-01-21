@@ -13,7 +13,7 @@ const Query: Required<QueryResolvers<ResolverContext>> = {
   },
   auth(_parent, _args, _context, _info) {
     return {
-      isAuthenticated: true,
+      isAuthenticated: false,
       user: {
         gender: 'female',
         name: {
@@ -33,20 +33,20 @@ const Mutation: Required<MutationResolvers<ResolverContext>> = {
     return userProfile
   },
 
-  // signIn(_parent, _args, _context, _info) {
-  //   return {
-  //     isAuthenticated: true,
-  //     // user: {
-  //     //   gender: 'male',
-  //     //   name: {
-  //     //     title: 'Dr',
-  //     //     first: 'Ron',
-  //     //     last: 'Brunkow'       
-  //     //   }
-  //     // },
-  //     // userFullName: 'Ron Brunkow'
-  //   }
-  // }
+  signIn(_parent, _args, _context, _info) {
+    return {
+      isAuthenticated: true,
+      user: {
+        gender: 'male',
+        name: {
+          title: 'Dr',
+          first: 'Ron',
+          last: 'Brunkow'       
+        }
+      },
+      userFullName: 'Ron Brunkow'
+    }
+  }
 }
 
 export default { Query, Mutation }
