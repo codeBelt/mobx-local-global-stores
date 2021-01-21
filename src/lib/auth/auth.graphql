@@ -1,0 +1,20 @@
+query Auth {
+  auth {
+    isAuthenticated
+    user {
+      gender
+      name {
+        first
+      }
+    }
+    userFullName
+  }
+}
+
+# mutation SignIn() {
+#   signIn() {
+#     isAuthenticated
+#     # user
+#     # userFullName
+#   }
+# }

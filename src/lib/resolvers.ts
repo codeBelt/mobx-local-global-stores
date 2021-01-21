@@ -11,6 +11,20 @@ const Query: Required<QueryResolvers<ResolverContext>> = {
   viewer(_parent, _args, _context, _info) {
     return userProfile
   },
+  auth(_parent, _args, _context, _info) {
+    return {
+      isAuthenticated: true,
+      user: {
+        gender: 'female',
+        name: {
+          title: 'Lil',
+          first: 'Wayne',
+          last: 'Carter'       
+        }
+      },
+      userFullName: 'Wayne Carter'
+    }
+  }
 }
 
 const Mutation: Required<MutationResolvers<ResolverContext>> = {
@@ -18,11 +32,19 @@ const Mutation: Required<MutationResolvers<ResolverContext>> = {
     userProfile.name = _args.name
     return userProfile
   },
+
   // signIn(_parent, _args, _context, _info) {
   //   return {
-  //     id: String(1),
-  //     name: 'John Smith',
-  //     status: 'cached',
+  //     isAuthenticated: true,
+  //     // user: {
+  //     //   gender: 'male',
+  //     //   name: {
+  //     //     title: 'Dr',
+  //     //     first: 'Ron',
+  //     //     last: 'Brunkow'       
+  //     //   }
+  //     // },
+  //     // userFullName: 'Ron Brunkow'
   //   }
   // }
 }
