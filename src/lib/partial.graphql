@@ -1,4 +1,4 @@
-fragment Partial on User {
+fragment Partial on OldUser {
   id
   name
 }

@@ -1,11 +1,9 @@
 type Query {
-  viewer: User!
+  viewer: OldUser!
+  auth: Auth!
 }
 
 type Mutation {
-  updateName(name: String!): User!
-  # signIn(): User!
+  updateName(name: String!): OldUser!
+  # signIn(): AuthStore!
 }
-
-
-
