@@ -2,11 +2,21 @@ import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
+import { useViewerQuery } from '../../../../__generated__/src/lib/viewer.graphql';
+import { useAuthQuery } from '../../../../__generated__/src/lib/auth/auth.graphql';
 
 export interface IProps {}
 
 export const SignInModal: React.FC<IProps> = observer((props) => {
   const { authStore } = useGlobalStore();
+
+  // const { data, loading, error } = useViewerQuery({
+  //   variables: {},
+  // });
+
+  const { data, loading, error } = useAuthQuery();
+
+  console.log(data);
 
   return (
     <Modal closeOnDimmerClick={false} closeOnEscape={false} open={!authStore.isAuthenticated} size={'tiny'}>
