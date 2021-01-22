@@ -25,5 +25,6 @@ export default class GlobalStore {
 
   async hydrate(initialState?: Partial<GlobalStore>) {
     // TODO: hydrate your global stores when needed
+    // this.exampleStore.hydrate(initialState.exampleStore);
   }
 }
