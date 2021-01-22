@@ -41,5 +41,5 @@ You could also fork my repo and create a PR to show me how you would improve som
 
 - How to resole some of the `[mobx]` warnings I am getting in the browser console.
   - You need to run the code locally `npm run dev`
-- Validate I am following best practice with Mobx with factory functions.
+- Validate I am following best practice with Mobx and factory functions.
 - Help me understand how to remove `runInAction` from [ToastGlobalStore](https://github.com/codeBelt/mobx-local-global-stores/blob/main/src/stores/toast/ToastGlobalStore.ts) and validate I set up [ToastNotifier](https://github.com/codeBelt/mobx-local-global-stores/blob/main/src/components/ui/toast-notifier/ToastNotifier.tsx) correctly.
