@@ -33,9 +33,7 @@ If you want to see an overview of the files using Mobx check out this [PR Diff](
 
 ### Feedback Welcomed
 
-If you want to give me feedback on how to improve my usage with MobX, TypeScript types, or Next.js. Create an issue on my [repo](https://github.com/codeBelt/mobx-local-global-stores).
-
-If you a lot of feedback I can add you to the repo and give you a [PR](https://github.com/codeBelt/mobx-local-global-stores/pull/4/files) to add comments on. Leave me a message in [issues](https://github.com/codeBelt/mobx-local-global-stores/issues).
+If you want to give me feedback on how to improve my usage with MobX, TypeScript types, or Next.js. Create an issue on my [repo](https://github.com/codeBelt/mobx-local-global-stores). You call also fork my repo and create a PR to show me how you would improve something.
 
 ### Help Wanted
 
