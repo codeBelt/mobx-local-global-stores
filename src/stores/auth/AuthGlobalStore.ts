@@ -24,7 +24,7 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
     },
 
     get userFullName(): string {
-      return `${this.user?.name?.first} ${this.user?.name?.last}`;
+      return `${this.user?.name?.first} ${this.user?.name?.last}`.trim();
     },
 
     *signIn() {
