@@ -1,7 +1,10 @@
 import environment, { Environment } from './base';
 
-const baseApi = 'https://api.tvmaze.com';
-const env = environment(baseApi);
+/*
+ * https://blog.usejournal.com/my-awesome-custom-react-environment-variables-setup-8ebb0797d8ac
+ */
+
+const env = environment();
 
 const developmentEnv: Environment = {
   ...env,
