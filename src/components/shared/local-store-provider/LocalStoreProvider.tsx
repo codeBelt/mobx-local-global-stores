@@ -2,7 +2,7 @@ import React, { ReactElement, useContext } from 'react';
 
 const LocalStoreProviderContext = React.createContext(null);
 
-export const useLocalStore = <T extends Record<string, unknown>>(): T => {
+export const useLocalStore = <T extends unknown>(): T => {
   const value = useContext(LocalStoreProviderContext);
 
   if (value === null) {

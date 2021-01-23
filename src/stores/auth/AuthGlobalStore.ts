@@ -33,9 +33,9 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
       const response: ApiResponse<IUserResponse> = yield getUserRequest();
 
       this.authResults = {
-        ...this.authResults,
-        ...response,
+        data: this.authResults.data,
         isRequesting: false,
+        ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
       };
 
       if (this.user) {
