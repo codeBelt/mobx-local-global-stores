@@ -11,7 +11,7 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
   observable({
     authResults: initialResponseStatus<IUserResponse | null>(null, false),
 
-    get isAuthenticated() {
+    get isAuthenticated(): boolean {
       return Boolean(this.authResults.data);
     },
 
@@ -43,8 +43,8 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
       }
     },
 
-    signOut() {
-      this.authResults.data = null;
+    signOut(): void {
+      this.authResults = initialResponseStatus(null, false);
 
       Router.router?.push(Routes.Index);
     },

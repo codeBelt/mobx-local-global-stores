@@ -37,7 +37,7 @@ export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
       });
     },
 
-    setSortType(sortType: EpisodesToggleOption) {
+    setSortType(sortType: EpisodesToggleOption): void {
       this.sortType = sortType;
 
       this.globalStore.toastStore.enqueueToast('Nice! You just sorted Server-Side Rendered Content.', 'info');
