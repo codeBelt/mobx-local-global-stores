@@ -36,9 +36,9 @@ export const IndexPageStore = () =>
       const response: ApiResponse<IShow> = yield getShowRequest(defaultShowId);
 
       this.showResults = {
-        ...this.showResults,
-        ...response,
+        data: this.showResults.data,
         isRequesting: false,
+        ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
       };
     },
 
@@ -46,9 +46,9 @@ export const IndexPageStore = () =>
       const response: ApiResponse<ICast[]> = yield getCastsRequest(defaultShowId);
 
       this.castsResults = {
-        ...this.castsResults,
-        ...response,
+        data: this.castsResults.data,
         isRequesting: false,
+        ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
       };
     },
   });

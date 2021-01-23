@@ -23,9 +23,9 @@ export class AboutPageStore {
     const response: ApiResponse<null> = yield getErrorRequest();
 
     this.errorExampleResults = {
-      ...this.errorExampleResults,
-      ...response,
+      data: this.errorExampleResults.data,
       isRequesting: false,
+      ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
     };
 
     if (response.error) {
