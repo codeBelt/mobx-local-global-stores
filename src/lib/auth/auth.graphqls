@@ -1,18 +1,6 @@
 type Auth {
   isAuthenticated: Boolean!
-  user: User!
   userFullName: String!
-}
-
-type User {
-  gender: String!
-  name: UserName!
-}
-
-type UserName {
-  title: String!
-  first: String!
-  last: String!
 }
 
 

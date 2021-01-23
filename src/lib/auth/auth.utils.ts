@@ -9,35 +9,23 @@ export const signOut = () => {
       auth: {
         isAuthenticated: false,
         userFullName: '',
-        user: {
-          name: {
-            first: '',
-          },
-          gender: '',
-        },
       },
     },
     query: AuthDocument,
   });
 }
 
-export const signIn = ( data: any) => {
+// export const signIn = ( data: any) => {
 
-  const client = initializeApollo()
+//   const client = initializeApollo()
   
-  client.cache.writeQuery<AuthQuery>({
-    data: {
-      auth: {
-        isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
-        userFullName: data?.signIn?.userFullName ?? '',
-        user: {
-          name: {
-            first: data?.signIn?.user?.name?.first ?? '',
-          },
-          gender: data?.signIn?.user?.gender ?? '',
-        },
-      },
-    },
-    query: AuthDocument,
-  });
-}
+//   client.cache.writeQuery<AuthQuery>({
+//     data: {
+//       auth: {
+//         isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
+//         userFullName: data?.signIn?.userFullName ?? '',
+//       },
+//     },
+//     query: AuthDocument,
+//   });
+// }

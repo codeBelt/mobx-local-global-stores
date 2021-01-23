@@ -20,12 +20,6 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
           auth: {
             isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
             userFullName: data?.signIn?.userFullName ?? '',
-            user: {
-              name: {
-                first: data?.signIn?.user?.name?.first ?? '',
-              },
-              gender: data?.signIn?.user?.gender ?? '',
-            },
           },
         },
         query: AuthDocument,
