@@ -6,12 +6,18 @@ import { defaultShowId } from '../../../domains/shows/shows.constants';
 import { useRouter } from 'next/router';
 import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
+import { useApolloClient } from '@apollo/client';
+import { AuthDocument, AuthQuery, useAuthQuery } from 'lib/auth/auth.graphql';
+import { signOut } from 'lib/auth/auth.utils';
 
 interface IProps {}
 
 export const MainNav: React.FC<IProps> = observer((props) => {
   const router = useRouter();
   const { authStore } = useGlobalStore();
+  const client = useApolloClient();
+
+  const { data, loading, error } = useAuthQuery();
 
   return (
     <Segment inverted={true}>
@@ -29,13 +35,13 @@ export const MainNav: React.FC<IProps> = observer((props) => {
             </NextLink>
           </Menu>
         </Grid.Column>
-        {authStore.isAuthenticated && (
+        {data?.auth?.isAuthenticated && (
           <Grid.Column textAlign="right">
             <Button as="div" labelPosition="left">
               <Label basic={true} pointing="right">
-                {authStore.userFullName}
+                {data?.auth?.userFullName}
               </Label>
-              <Button icon={true} onClick={() => authStore.signOut()}>
+              <Button icon={true} onClick={() => signOut()}>
                 Sign Out <Icon name="share square outline" />
               </Button>
             </Button>

@@ -14,8 +14,13 @@ query Auth {
 mutation SignIn($name: String) {
   signIn(name: $name) {
     isAuthenticated
-    # user
-    # userFullName
+    # user {
+    #   gender
+    #   name {
+    #     first
+    #   }
+    # }
+    userFullName
   }
 }
 

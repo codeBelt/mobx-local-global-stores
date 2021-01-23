@@ -1,5 +1,8 @@
-import { QueryResolvers, MutationResolvers } from './type-defs.graphqls'
+import { QueryResolvers, MutationResolvers, AuthResolvers, Auth, OldUser } from './type-defs.graphqls'
 import { ResolverContext } from './apollo'
+import { getUserRequest } from 'domains/auth/auth.services'
+import { SigningOptions } from 'crypto'
+import { SignInMutation } from './auth/auth.graphql'
 
 const userProfile = {
   id: String(1),
@@ -8,21 +11,21 @@ const userProfile = {
 }
 
 const Query: Required<QueryResolvers<ResolverContext>> = {
-  viewer(_parent, _args, _context, _info) {
+  viewer(_parent, _args, _context, _info): OldUser {
     return userProfile
   },
-  auth(_parent, _args, _context, _info) {
+  auth(_parent, _args, _context, _info): Auth {
     return {
       isAuthenticated: false,
       user: {
-        gender: 'female',
+        gender: '',
         name: {
-          title: 'Lil',
-          first: 'Wayne',
-          last: 'Carter'       
+          title: '',
+          first: '',
+          last: ''       
         }
       },
-      userFullName: 'Wayne Carter'
+      userFullName: ''
     }
   }
 }
@@ -33,18 +36,21 @@ const Mutation: Required<MutationResolvers<ResolverContext>> = {
     return userProfile
   },
 
-  signIn(_parent, _args, _context, _info) {
+
+  signIn: async (_parent, _args, _context, _info) => {
+    const randomUser = await getUserRequest()
+
     return {
-      isAuthenticated: true,
+      isAuthenticated: Boolean(randomUser.data),
+      userFullName: `${randomUser.data?.results[0]?.name?.first} ${randomUser.data?.results[0]?.name?.last}`,
       user: {
-        gender: 'male',
+        gender: randomUser.data?.results[0]?.gender || '',
         name: {
-          title: 'Dr',
-          first: 'Ron',
-          last: 'Brunkow'       
+          title: randomUser.data?.results[0]?.name?.title || '',
+          first: randomUser.data?.results[0]?.name?.first || '',
+          last: randomUser.data?.results[0]?.name?.last || ''
         }
       },
-      userFullName: 'Ron Brunkow'
     }
   }
 }
