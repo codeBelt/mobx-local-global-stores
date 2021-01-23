@@ -1,36 +1,37 @@
-import { observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { getErrorRequest } from '../../../domains/shows/shows.services';
 import { initialResponseStatus } from '../../../utils/mobx.utils';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 
-export const AboutPageStore = () =>
-  observable({
-    globalStore: getGlobalStore(),
-    errorExampleResults: initialResponseStatus<null>(null),
+export class AboutPageStore {
+  globalStore = getGlobalStore();
+  errorExampleResults = initialResponseStatus<null>(null);
 
-    /**
-     * Store initializer. Should only be called once.
-     */
-    *init() {
-      yield Promise.all([this.loadSomething()]);
-    },
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    *loadSomething() {
-      const response: ApiResponse<null> = yield getErrorRequest();
+  /**
+   * Store initializer. Should only be called once.
+   */
+  *init() {
+    yield Promise.all([this.loadSomething()]);
+  }
 
-      this.errorExampleResults = {
-        ...this.errorExampleResults,
-        ...response,
-        isRequesting: false,
-      };
+  *loadSomething() {
+    const response: ApiResponse<null> = yield getErrorRequest();
 
-      if (response.error) {
-        const message = `${response.statusCode}: ${response.error.message}`;
+    this.errorExampleResults = {
+      data: this.errorExampleResults.data,
+      isRequesting: false,
+      ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
+    };
 
-        this.globalStore.toastStore.enqueueToast(message, 'error');
-      }
-    },
-  });
+    if (response.error) {
+      const message = `${response.statusCode}: ${response.error.message}`;
 
-export type AboutPageStore = ReturnType<typeof AboutPageStore>;
+      this.globalStore.toastStore.enqueueToast(message, 'error');
+    }
+  }
+}
