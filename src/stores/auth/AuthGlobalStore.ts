@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import GlobalStore from '../GlobalStore';
 import { getUserRequest } from '../../domains/auth/auth.services';
 import { ApiResponse } from '../../utils/http/http.types';
@@ -7,47 +7,51 @@ import { Routes } from '../../constants/Routes';
 import { IUser, IUserResponse } from '../../domains/auth/auth.types';
 import Router from 'next/router';
 
-export const AuthGlobalStore = (globalStore: GlobalStore) =>
-  observable({
-    authResults: initialResponseStatus<IUserResponse | null>(null, false),
+export class AuthGlobalStore {
+  globalStore: GlobalStore;
+  authResults = initialResponseStatus<IUserResponse | null>(null, false);
 
-    get isAuthenticated(): boolean {
-      return Boolean(this.authResults.data);
-    },
+  constructor(globalStore: GlobalStore) {
+    this.globalStore = globalStore;
 
-    get user(): IUser | null {
-      if (this.authResults.data) {
-        return this.authResults.data.results[0];
-      }
+    makeAutoObservable(this);
+  }
 
-      return null;
-    },
+  get isAuthenticated(): boolean {
+    return Boolean(this.authResults.data);
+  }
 
-    get userFullName(): string {
-      return `${this.user?.name?.first} ${this.user?.name?.last}`.trim();
-    },
+  get user(): IUser | null {
+    if (this.authResults.data) {
+      return this.authResults.data.results[0];
+    }
 
-    *signIn() {
-      this.authResults.isRequesting = true;
+    return null;
+  }
 
-      const response: ApiResponse<IUserResponse> = yield getUserRequest();
+  get userFullName(): string {
+    return `${this.user?.name?.first} ${this.user?.name?.last}`.trim();
+  }
 
-      this.authResults = {
-        data: this.authResults.data,
-        isRequesting: false,
-        ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
-      };
+  *signIn() {
+    this.authResults.isRequesting = true;
 
-      if (this.user) {
-        globalStore.toastStore.enqueueToast(`Welcome ${this.userFullName}`, 'success');
-      }
-    },
+    const response: ApiResponse<IUserResponse> = yield getUserRequest();
 
-    signOut(): void {
-      this.authResults = initialResponseStatus(null, false);
+    this.authResults = {
+      data: this.authResults.data,
+      isRequesting: false,
+      ...response, // Overwrites the default data prop or adds an error. Also adds the statusCode.
+    };
 
-      Router.router?.push(Routes.Index);
-    },
-  });
+    if (this.user) {
+      this.globalStore.toastStore.enqueueToast(`Welcome ${this.userFullName}`, 'success');
+    }
+  }
 
-export type AuthGlobalStore = ReturnType<typeof AuthGlobalStore>;
+  signOut(): void {
+    this.authResults = initialResponseStatus(null, false);
+
+    Router.router?.push(Routes.Index);
+  }
+}
