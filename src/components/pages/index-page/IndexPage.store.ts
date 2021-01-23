@@ -21,7 +21,7 @@ export const IndexPageStore = () =>
       return orderBy(this.castsResults.data, (cast) => cast.person[this.sortValue], 'asc');
     },
 
-    setSortOption(sortValue: string) {
+    setSortOption(sortValue: string): void {
       this.sortValue = sortValue;
     },
 
