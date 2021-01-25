@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Segment, Grid, Button, Label, Icon } from 'semantic-ui-react';
 import NextLink from 'next/link';
-import { Routes, RoutesDynamicKey } from '../../../constants/Routes';
+import { Routes, RoutesDynamicKey } from '../../../constants/Routes.constants';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import { useRouter } from 'next/router';
 import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
