@@ -5,6 +5,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
+import { toastItemsVar } from './toasts/toasts.utils'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
@@ -31,7 +32,19 @@ function createApolloClient(context?: ResolverContext) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createIsomorphLink(context),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            toastItems: {
+              read() {
+                return toastItemsVar()
+              }
+            }
+          }
+        }
+      }
+    }),
   })
 }
 

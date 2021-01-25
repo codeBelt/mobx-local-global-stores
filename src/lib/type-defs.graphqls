@@ -1,6 +1,7 @@
 type Query {
   viewer: OldUser!
   auth: Auth!
+  toastItems: [ToastNotification]
 }
 
 type Mutation {

@@ -3,8 +3,7 @@ import { Button, Modal } from 'semantic-ui-react';
 import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
 import { AuthDocument, AuthQuery, useAuthQuery, useSignInMutation } from 'lib/auth/auth.graphql';
-
-import { useApolloClient } from '@apollo/client';
+import { toastSuccessMessage } from 'components/ui/toast-notifier/ToastNotifier.utils';
 
 export interface IProps {}
 
@@ -15,6 +14,7 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
     // update: (cache, { data }) => signIn(data),
 
     update: (cache, { data }) => {
+      toastSuccessMessage(`Welcome ${data?.signIn?.userFullName}`);
       cache.writeQuery<AuthQuery>({
         data: {
           auth: {

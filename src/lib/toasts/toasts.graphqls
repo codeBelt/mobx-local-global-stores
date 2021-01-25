@@ -1,0 +1,13 @@
+type ToastNotification {
+  message: String!
+  variant: ToastVariant!
+  key: String!
+}
+
+enum ToastVariant {
+  default
+  success
+  error
+  warning
+  info
+}
