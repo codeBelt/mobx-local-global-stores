@@ -1,0 +1,67 @@
+type Image {
+  medium: String
+  original: String
+}
+
+type Episode {
+  id: Int
+  season: Int
+  Int: Int
+  name: String
+  airdate: String
+  image: Image
+  summary: String
+}
+
+type EpisodeTableRow {
+  episode: Int
+  name: String
+  date: String
+  image: String
+}
+
+type EpisodeTable {
+  title: String
+  rows: [EpisodeTableRow]
+}
+
+type Person {
+  id: Int!
+  name: String!
+  birthday: String!
+  image: Image
+}
+
+type Character {
+  id: Int
+  name: String!
+  image: Image
+}
+
+type Cast {
+  person: Person!
+  character: Character!
+  self: Boolean!
+  voice: Boolean!
+}
+
+type Show {
+  id: Int!
+  name: String!
+  summary: String!
+  genres: [String!]
+  network: Network!
+  image: Image!
+}
+
+type Network {
+  id: Int
+  name: String
+  country: Country
+}
+
+type Country {
+  name: String
+  code: String
+  timezone: String
+}

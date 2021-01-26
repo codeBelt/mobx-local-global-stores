@@ -1,0 +1,32 @@
+query GetShowDetailsAndCastByShowId($showId: String!) {
+  cast(showId: $showId) {
+    self
+    voice
+    person {
+      id
+      name
+      birthday
+      image {
+        medium
+      }
+    }
+    character {
+      name
+      image {
+        medium
+      }
+    }
+  }
+  show(showId: $showId) {
+    id
+    name
+    summary
+    genres
+    network {
+      name
+    }
+    image {
+      medium
+    }
+  }
+}

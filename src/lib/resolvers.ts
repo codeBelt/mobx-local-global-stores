@@ -1,6 +1,7 @@
-import { QueryResolvers, MutationResolvers, AuthResolvers, Auth, OldUser } from './type-defs.graphqls'
+import { QueryResolvers, MutationResolvers, AuthResolvers, Auth, OldUser, Cast, Show } from './type-defs.graphqls'
 import { ResolverContext } from './apollo'
 import { getUserRequest } from 'domains/auth/auth.services'
+import { getCastByShowId, getShowByShowId } from './shows/shows.resolvers'
 
 const userProfile = {
   id: String(1),
@@ -17,7 +18,9 @@ const Query: Required<QueryResolvers<ResolverContext>> = {
       isAuthenticated: false,
       userFullName: ''
     }
-  }
+  },
+  cast: getCastByShowId,
+  show: getShowByShowId,
 }
 
 const Mutation: Required<MutationResolvers<ResolverContext>> = {

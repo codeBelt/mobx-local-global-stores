@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card } from 'semantic-ui-react';
-import { observer } from 'mobx-react-lite';
-import { IndexPageStore } from '../IndexPage.store';
 import { ActorCard } from './actor-card/ActorCard';
 import { ActorsSortOption } from './actors-sort-option/ActorsSortOption';
-import { useLocalStore } from '../../../shared/local-store-provider/LocalStoreProvider';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/shows.graphql';
+import { defaultShowId } from 'domains/shows/shows.constants';
+import { actorSortByVar } from './Actors.state';
+import orderBy from 'lodash.orderby';
+import { useReactiveVar } from '@apollo/client';
 
 interface IProps {}
 
-export const Actors: React.FC<IProps> = observer((props) => {
-  const localStore = useLocalStore<IndexPageStore>();
+export const Actors: React.FC<IProps> = (props) => {
+  const actorSortBy = useReactiveVar(actorSortByVar);
+
+  const { data } = useGetShowDetailsAndCastByShowIdQuery({
+    variables: {
+      showId: defaultShowId,
+    },
+  });
+
+  const cast = useMemo(() => orderBy(data?.cast ?? [], (castMember) => castMember.person[actorSortBy], 'asc'), [
+    actorSortBy,
+    data?.cast,
+  ]);
 
   return (
     <>
@@ -17,13 +30,13 @@ export const Actors: React.FC<IProps> = observer((props) => {
         <ActorsSortOption />
       </Card.Group>
       <Card.Group centered={true}>
-        {localStore.actors.map((model) => (
-          <ActorCard key={model.person.name} cardData={model} />
+        {cast.map((model) => (
+          <ActorCard key={model.person.id} cardData={model} />
         ))}
       </Card.Group>
     </>
   );
-});
+};
 
 Actors.displayName = 'Actors';
 Actors.defaultProps = {};

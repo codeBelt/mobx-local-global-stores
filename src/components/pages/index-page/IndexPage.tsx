@@ -6,14 +6,20 @@ import { Actors } from './actors/Actors';
 import { observer } from 'mobx-react-lite';
 import { IndexPageStore } from './IndexPage.store';
 import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
+import { defaultShowId } from 'domains/shows/shows.constants';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/shows.graphql';
 
 interface IProps {}
 
 export const IndexPage: React.FC<IProps> = observer((props) => {
-  const localStore = useLocalStore<IndexPageStore>();
+  const { loading } = useGetShowDetailsAndCastByShowIdQuery({
+    variables: {
+      showId: defaultShowId,
+    },
+  });
 
   return (
-    <LoadingIndicator isActive={localStore.isRequesting}>
+    <LoadingIndicator isActive={loading}>
       <MainOverview />
       <Divider horizontal={true}>
         <Header as="h4">
