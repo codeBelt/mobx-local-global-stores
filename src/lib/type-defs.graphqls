@@ -1,5 +1,4 @@
 type Query {
-  viewer: OldUser!
   auth: Auth!
   toastItems: [ToastNotification]
   cast(showId: String!): [Cast!]
@@ -8,6 +7,5 @@ type Query {
 }
 
 type Mutation {
-  updateName(name: String!): OldUser!
   signIn(name: String): Auth!
 }

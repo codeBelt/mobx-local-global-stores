@@ -11,4 +11,3 @@ mutation SignIn($name: String) {
     userFullName
   }
 }
-

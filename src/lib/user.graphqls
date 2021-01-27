@@ -1,5 +1,0 @@
-type OldUser {
-  id: ID!
-  name: String!
-  status: String!
-}

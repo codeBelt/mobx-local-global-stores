@@ -1,8 +1,8 @@
-import { initializeApollo } from "lib/apollo"
-import { Auth, AuthDocument, AuthQuery, SignInMutation, SignInMutationResult } from "./auth.graphql";
+import { initializeApollo } from 'lib/apollo';
+import { Auth, AuthDocument, AuthQuery, SignInMutation, SignInMutationResult } from './auth.graphql';
 
 export const signOut = () => {
-  const client = initializeApollo()
+  const client = initializeApollo();
 
   client.cache.writeQuery<AuthQuery>({
     data: {
@@ -13,14 +13,12 @@ export const signOut = () => {
     },
     query: AuthDocument,
   });
-}
-
-
+};
 
 // export const signIn = ( data: any) => {
 
 //   const client = initializeApollo()
-  
+
 //   client.cache.writeQuery<AuthQuery>({
 //     data: {
 //       auth: {

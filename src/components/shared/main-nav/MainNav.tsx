@@ -1,21 +1,17 @@
 import React from 'react';
 import { Menu, Segment, Grid, Button, Label, Icon } from 'semantic-ui-react';
 import NextLink from 'next/link';
-import { Routes, RoutesDynamicKey } from '../../../constants/Routes';
-import { defaultShowId } from '../../../domains/shows/shows.constants';
+import { Routes, RoutesDynamicKey } from 'constants/Routes';
+import { defaultShowId } from 'domains/shows/shows.constants';
 import { useRouter } from 'next/router';
-import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
-import { useApolloClient } from '@apollo/client';
-import { AuthDocument, AuthQuery, useAuthQuery } from 'lib/auth/auth.graphql';
-import { signOut } from 'lib/auth/auth.utils';
+import { useAuthQuery } from 'domains/auth/auth.graphql';
+import { signOut } from 'domains/auth/auth.utils';
 
 interface IProps {}
 
 export const MainNav: React.FC<IProps> = observer((props) => {
   const router = useRouter();
-  const { authStore } = useGlobalStore();
-  const client = useApolloClient();
 
   const { data, loading, error } = useAuthQuery();
 
