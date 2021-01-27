@@ -3,10 +3,7 @@ import dayjs from 'dayjs';
 import groupBy from 'lodash.groupby';
 import { Episode } from './EpisodesPage.graphql';
 import { SortDirection } from 'constants/common.types';
-import { makeVar } from '@apollo/client';
 import orderBy from 'lodash.orderby';
-
-export const episodesSortByVar = makeVar<SortDirection>(SortDirection.ASCENDING);
 
 export const generateTableData = (episodes: Episode[] = [], error?: string) => {
   if (error) {

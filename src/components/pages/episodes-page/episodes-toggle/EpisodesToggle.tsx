@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { episodesSortByVar } from '../EpisodesPage.utils';
+import { episodesSortByVar } from '../EpisodesPage.state';
 import { useReactiveVar } from '@apollo/client';
 import { SortDirection } from 'constants/common.types';
 import { toastSuccessMessage } from 'domains/toasts/toasts.utils';

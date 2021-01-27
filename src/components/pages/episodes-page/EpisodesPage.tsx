@@ -3,7 +3,8 @@ import { EpisodesTable } from './episodes-table/EpisodesTable';
 import { Container } from 'semantic-ui-react';
 import { EpisodesToggle } from './episodes-toggle/EpisodesToggle';
 import { Episode, useGetEpisodesByShowIdQuery } from './EpisodesPage.graphql';
-import { episodesSortByVar, generateAndSortTableData } from './EpisodesPage.utils';
+import { generateAndSortTableData } from './EpisodesPage.utils';
+import { episodesSortByVar } from './EpisodesPage.state';
 import { useReactiveVar } from '@apollo/client';
 
 export interface IProps {
