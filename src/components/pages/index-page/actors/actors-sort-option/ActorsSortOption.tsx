@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select } from 'semantic-ui-react';
 import { ActorSortBy, actorSortOptions } from './ActorsSortOption.constants';
-import { actorSortByVar } from '../Actors.state';
+import { actorSortByVar } from '../../IndexPage.state';
 
 interface IProps {}
 
