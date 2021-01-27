@@ -1,5 +1,5 @@
-import { getCastsRequest, getShowRequest } from "domains/shows/shows.services"
-import { Cast, Show } from "lib/type-defs.graphqls"
+import { getCastsRequest, getEpisodesRequest, getShowRequest } from "domains/shows/shows.services"
+import { Cast, Episode, Show } from "lib/type-defs.graphqls"
 
 export const getCastByShowId = async (_parent, _args, _context, _info): Promise<Cast[]> => {
   const castRequest = await getCastsRequest(_args.showId)
@@ -55,3 +55,20 @@ export const getShowByShowId = async (_parent, _args, _context, _info): Promise<
   }
 }
 
+export const getEpisodesByShowId = async (_parent, _args, _context, _info): Promise<Episode[]> => {
+  const episodesRequest = await getEpisodesRequest(_args.showId)
+
+  const episodes = episodesRequest.data ?? []
+
+  return episodes.map(episode => ({
+    id:episode.id,
+    season:episode.season,
+    name:episode.name,
+    number: episode.number,
+    airdate:episode.airdate,
+    image: {
+      medium: episode.image.medium ?? '',
+    },
+    summary:episode.summary,
+  }))
+}

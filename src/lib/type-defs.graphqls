@@ -4,6 +4,7 @@ type Query {
   toastItems: [ToastNotification]
   cast(showId: String!): [Cast!]
   show(showId: String!): Show
+  episodes(showId: String!): [Episode]
 }
 
 type Mutation {

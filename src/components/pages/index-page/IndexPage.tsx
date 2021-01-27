@@ -4,10 +4,8 @@ import { LoadingIndicator } from '../../ui/loading-indicator/LoadingIndicator';
 import { MainOverview } from './main-overview/MainOverview';
 import { Actors } from './actors/Actors';
 import { observer } from 'mobx-react-lite';
-import { IndexPageStore } from './IndexPage.store';
-import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
 import { defaultShowId } from 'domains/shows/shows.constants';
-import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/shows.graphql';
+import { useGetShowDetailsAndCastByShowIdQuery } from './IndexPage.graphql';
 
 interface IProps {}
 

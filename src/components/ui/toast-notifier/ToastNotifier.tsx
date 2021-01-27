@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { OptionsObject, SnackbarAction, useSnackbar } from 'notistack';
 import { Button } from 'semantic-ui-react';
-import { useGetToastItemsQuery } from '../../../lib/toasts/toasts.graphql';
-import { removeToasts } from './ToastNotifier.utils';
+import { useGetToastItemsQuery } from 'domains/toasts/toasts.graphql';
+import { removeToasts } from 'domains/toasts/toasts.utils';
 
 interface IProps {}
 

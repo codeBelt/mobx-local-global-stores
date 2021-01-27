@@ -4,13 +4,13 @@ type Image {
 }
 
 type Episode {
-  id: Int
-  season: Int
-  Int: Int
-  name: String
-  airdate: String
-  image: Image
-  summary: String
+  id: Int!
+  season: Int!
+  number: Int!
+  name: String!
+  airdate: String!
+  image: Image!
+  summary: String!
 }
 
 type EpisodeTableRow {

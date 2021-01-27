@@ -1,0 +1,11 @@
+query GetEpisodesByShowId($showId: String!) {
+  episodes(showId: $showId) {
+    name
+    airdate
+    season
+    number
+    image {
+      medium
+    }
+  }
+}

@@ -5,7 +5,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
-import { toastItemsVar } from './toasts/toasts.utils'
+import { toastItemsVar } from '../domains/toasts/toasts.state'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 

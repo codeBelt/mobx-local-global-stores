@@ -3,7 +3,7 @@ import { Button, Modal } from 'semantic-ui-react';
 import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
 import { observer } from 'mobx-react-lite';
 import { AuthDocument, AuthQuery, useAuthQuery, useSignInMutation } from 'lib/auth/auth.graphql';
-import { toastSuccessMessage } from 'components/ui/toast-notifier/ToastNotifier.utils';
+import { toastSuccessMessage } from 'domains/toasts/toasts.utils';
 
 export interface IProps {}
 

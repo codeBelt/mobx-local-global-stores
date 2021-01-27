@@ -7,9 +7,11 @@ import { ApiResponse } from '../../utils/http/http.types';
 import { IEpisode } from '../../domains/shows/shows.types';
 import { getEpisodesRequest } from '../../domains/shows/shows.services';
 import { observer } from 'mobx-react-lite';
+import { useGetEpisodesByShowIdQuery } from 'domains/shows/shows.graphql';
 
 interface IProps {
   episodesResults: ApiResponse<IEpisode[]>;
+  episodeId: string;
 }
 
 const EpisodesRoute: NextPage<IProps> = observer((props) => {
@@ -17,7 +19,7 @@ const EpisodesRoute: NextPage<IProps> = observer((props) => {
 
   return (
     <LocalStoreProvider localStore={localStore}>
-      <EpisodesPage />
+      <EpisodesPage episodeId={props.episodeId} />
     </LocalStoreProvider>
   );
 });
@@ -30,6 +32,7 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
     return {
       props: {
         episodesResults: response,
+        episodeId: episodeId,
       },
     };
   }

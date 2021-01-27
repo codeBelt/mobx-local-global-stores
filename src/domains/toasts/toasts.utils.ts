@@ -1,5 +1,5 @@
-import { toastItemsVar } from 'lib/toasts/toasts.utils';
-import { ToastVariant } from 'lib/toasts/toasts.graphql';
+import { toastItemsVar } from 'domains/toasts/toasts.state';
+import { ToastVariant } from './toasts.graphql';
 
 export const toastSuccessMessage = (message: string): void => {
   toastItemsVar([...toastItemsVar(), { message, variant: ToastVariant.Success, key: new Date().toString() }]);
