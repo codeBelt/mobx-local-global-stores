@@ -4,13 +4,12 @@ import NextLink from 'next/link';
 import { Routes, RoutesDynamicKey } from 'constants/Routes';
 import { defaultShowId } from 'domains/shows/shows.constants';
 import { useRouter } from 'next/router';
-import { observer } from 'mobx-react-lite';
 import { useAuthQuery } from 'domains/auth/auth.graphql';
 import { signOut } from 'domains/auth/auth.utils';
 
 interface IProps {}
 
-export const MainNav: React.FC<IProps> = observer((props) => {
+export const MainNav: React.FC<IProps> = (props) => {
   const router = useRouter();
 
   const { data, loading, error } = useAuthQuery();
@@ -46,7 +45,7 @@ export const MainNav: React.FC<IProps> = observer((props) => {
       </Grid>
     </Segment>
   );
-});
+};
 
 MainNav.displayName = 'MainNav';
 MainNav.defaultProps = {};

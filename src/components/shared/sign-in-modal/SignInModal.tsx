@@ -1,39 +1,20 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
-import { observer } from 'mobx-react-lite';
-import { AuthDocument, AuthQuery, useAuthQuery, useSignInMutation } from 'domains/auth/auth.graphql';
-import { toastSuccessMessage } from 'domains/toasts/toasts.utils';
+import { useAuthQuery, useSignInMutation } from 'domains/auth/auth.graphql';
+import { signInUpdate } from 'domains/auth/auth.utils';
 
 export interface IProps {}
 
-export const SignInModal: React.FC<IProps> = observer((props) => {
-  const { authStore } = useGlobalStore();
-  const authCache = useAuthQuery();
-  const [signIn, auth] = useSignInMutation({
-    // update: (cache, { data }) => signIn(data),
+export const SignInModal: React.FC<IProps> = (props) => {
+  const { data, loading, error } = useAuthQuery();
 
-    update: (cache, { data }) => {
-      toastSuccessMessage(`Welcome ${data?.signIn?.userFullName}`);
-      cache.writeQuery<AuthQuery>({
-        data: {
-          auth: {
-            isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
-            userFullName: data?.signIn?.userFullName ?? '',
-          },
-        },
-        query: AuthDocument,
-      });
-    },
+  // Example of writing to the cache without using Reactive variables
+  const [signIn] = useSignInMutation({
+    update: signInUpdate,
   });
 
   return (
-    <Modal
-      closeOnDimmerClick={false}
-      closeOnEscape={false}
-      open={!authCache?.data?.auth?.isAuthenticated}
-      size={'tiny'}
-    >
+    <Modal closeOnDimmerClick={false} closeOnEscape={false} open={!data?.auth?.isAuthenticated} size={'tiny'}>
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content>
         <p>Welcome, please sign in.</p>
@@ -43,16 +24,15 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
           content="Sign In"
           labelPosition="right"
           icon="sign in"
-          // onClick={() => authStore.signIn()}
           onClick={() => signIn()}
           positive={true}
-          disabled={authStore.authResults.isRequesting}
-          loading={authStore.authResults.isRequesting}
+          disabled={loading}
+          loading={loading}
         />
       </Modal.Actions>
     </Modal>
   );
-});
+};
 
 SignInModal.displayName = 'SignInModal';
 SignInModal.defaultProps = {};

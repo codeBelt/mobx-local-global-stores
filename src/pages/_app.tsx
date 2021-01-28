@@ -9,9 +9,8 @@ import { MainNav } from '../components/shared/main-nav/MainNav';
 import { SnackbarProvider } from 'notistack';
 import { ToastNotifier } from '../components/ui/toast-notifier/ToastNotifier';
 import { SignInModalDynamic } from '../components/shared/sign-in-modal/SignInModal.dynamic';
-import { GlobalStoreProvider } from '../components/shared/global-store-provider/GlobalStoreProvider';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apollo';
+import { useApollo } from '../lib/apolloClient';
 
 NProgress.configure({ showSpinner: false, minimum: 0.1 });
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -30,14 +29,12 @@ const NextApp: React.FC<AppProps> = (props) => {
       </Head>
 
       <ApolloProvider client={apolloClient}>
-        <GlobalStoreProvider hydrationData={props.pageProps}>
-          <SnackbarProvider>
-            <MainNav />
-            <props.Component {...props.pageProps} />
-            <ToastNotifier />
-            <SignInModalDynamic />
-          </SnackbarProvider>
-        </GlobalStoreProvider>
+        <SnackbarProvider>
+          <MainNav />
+          <props.Component {...props.pageProps} />
+          <ToastNotifier />
+          <SignInModalDynamic />
+        </SnackbarProvider>
       </ApolloProvider>
     </>
   );
