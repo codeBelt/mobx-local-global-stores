@@ -3,7 +3,7 @@ import GlobalStore from '../GlobalStore';
 import { getUserRequest } from '../../domains/auth/auth.services';
 import { ApiResponse } from '../../utils/http/http.types';
 import { initialResponseStatus } from '../../utils/mobx.utils';
-import { Routes } from '../../constants/Routes';
+import { Routes } from '../../constants/Routes.constants';
 import { IUser, IUserResponse } from '../../domains/auth/auth.types';
 import Router from 'next/router';
 
@@ -46,6 +46,8 @@ export class AuthGlobalStore {
 
     if (this.user) {
       this.globalStore.toastStore.enqueueToast(`Welcome ${this.userFullName}`, 'success');
+    } else {
+      this.globalStore.toastStore.enqueueToast('Sign In Issue. Try Again.', 'error');
     }
   }
 
