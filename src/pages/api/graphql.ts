@@ -1,4 +1,4 @@
-import { apolloServer } from 'server/apolloServer';
+import { apolloServer } from 'apollo/apolloServer';
 
 export default apolloServer.createHandler({ path: '/api/graphql' });
 

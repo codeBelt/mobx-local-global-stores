@@ -1,6 +1,6 @@
 import { ApolloCache, FetchResult } from '@apollo/client';
 import { toastSuccessMessage } from 'domains/toasts/toasts.utils';
-import { initializeApollo } from 'server/apolloClient';
+import { initializeApollo } from 'apollo/apolloClient';
 import { AuthDocument, AuthQuery, SignInMutation, SignInMutationResult } from './auth.graphql';
 
 export const signOut = () => {

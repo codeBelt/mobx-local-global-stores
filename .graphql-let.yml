@@ -4,7 +4,7 @@
 # https://graphql-code-generator.com/docs/plugins/typescript-resolvers#use-your-model-types-mappers
 
 schema: 'src/**/*.graphqls'
-schemaEntrypoint: 'src/server/type-defs.graphqls'
+schemaEntrypoint: 'src/apollo/type-defs.graphqls'
 documents: 'src/**/*.graphql'
 plugins:
   - typescript
@@ -12,8 +12,8 @@ plugins:
   - typescript-react-apollo
   # - typescript-resolvers TODO: not sure why this isn't working--see links above
 config:
-  contextType: .server/context.models#ContextModel
+  contextType: .apollo/context.models#ContextModel
   mappers:
-    # Show: ./server/shows/shows.models#ShowModel
-    # Cast: ./server/shows/shows.models#CastModel
+    # Show: ./apollo/shows/shows.models#ShowModel
+    # Cast: ./apollo/shows/shows.models#CastModel
 cacheDir: __generated__
