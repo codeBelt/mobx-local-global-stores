@@ -14,7 +14,7 @@ export type ResolverContext = {
   res?: ServerResponse
 }
 
-function createIsomorphLink(context: ResolverContext = {}) {
+const createIsomorphLink = (context: ResolverContext = {}) => {
   if (typeof window === 'undefined') {
     const { SchemaLink } = require('@apollo/client/link/schema')
     const { schema } = require('./schema')
@@ -28,7 +28,7 @@ function createIsomorphLink(context: ResolverContext = {}) {
   }
 }
 
-function createApolloClient(context?: ResolverContext) {
+const createApolloClient = (context?: ResolverContext) => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createIsomorphLink(context),
@@ -48,12 +48,12 @@ function createApolloClient(context?: ResolverContext) {
   })
 }
 
-export function initializeApollo(
+export const initializeApollo = (
   initialState: any = null,
   // Pages with Next.js data fetching methods, like `getStaticProps`, can send
   // a custom context which will be used by `SchemaLink` to server render pages
   context?: ResolverContext
-) {
+) => {
   const _apolloClient = apolloClient ?? createApolloClient(context)
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -69,7 +69,7 @@ export function initializeApollo(
   return _apolloClient
 }
 
-export function useApollo(initialState: any) {
+export const useApollo = (initialState: any) => {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }
