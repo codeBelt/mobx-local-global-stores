@@ -1,6 +1,5 @@
-import { QueryResolvers, MutationResolvers, Auth, Show, Resolvers } from './type-defs.graphqls'
+import { QueryResolvers, MutationResolvers, Auth, Show, Resolvers, CastResolvers, ShowResolvers } from './type-defs.graphqls'
 import { getUserRequest } from 'domains/auth/auth.services'
-import { showResolvers, getEpisodesByShowId } from './shows/shows.resolvers'
 
 const resolvers: Resolvers = {
  Query: {
@@ -16,9 +15,10 @@ const resolvers: Resolvers = {
   show: async (_parent, _args, _context, _info) => {
     return _context.dataSources.showsAPI.getShowDetails(_args.showId);
   },
-  episodes: getEpisodesByShowId,
+  episodes: async (_parent, _args, _context, _info) => {
+    return _context.dataSources.showsAPI.getEpisodes(_args.showId);
+  },
 },
-...showResolvers,
 Mutation: {
   signIn: async (_parent, _args, _context, _info): Promise<Auth> => {
     const randomUser = await getUserRequest()

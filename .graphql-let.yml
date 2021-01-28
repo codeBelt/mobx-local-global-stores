@@ -10,10 +10,10 @@ plugins:
   - typescript
   - typescript-operations
   - typescript-react-apollo
-  - typescript-resolvers
+  # - typescript-resolvers TODO: not sure why this isn't working--see links above
 config:
   contextType: .lib/context.models#ContextModel
-  ./resolvers-types-valid.ts:
-    mappers:
-      Show: .lib/shows/shows.models#ShowModel
+  mappers:
+    # Show: .lib/shows/shows.models#ShowModel
+    # Cast: .lib/shows/shows.models#CastModel
 cacheDir: __generated__

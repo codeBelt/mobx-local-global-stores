@@ -5,8 +5,8 @@ export type CountryModel =  {
 }
 
 export type ImageModel = {
-  medium: String
-  original: String
+  medium: string
+  original: string
 }
 
 export type NetworkModel = {
@@ -29,8 +29,8 @@ export type ShowModel = {
 
 export type PersonModel = {
   id: number
-  name: String
-  birthday: String
+  name: string
+  birthday: string
   image: ImageModel
 }
 
@@ -45,4 +45,26 @@ export type CastModel = {
   character: CharacterModel
   self: boolean
   voice: boolean
+}
+
+export type EpisodeModel = {
+  id: number
+  season: number
+  number: number
+  name: string
+  airdate: string
+  image: ImageModel
+  summary: string
+}
+
+export type EpisodeTableRowModel = {
+  episode: number
+  name: string
+  date: string
+  image: string
+}
+
+export type EpisodeTableModel = {
+  title: string
+  rows: EpisodeTableRowModel[]
 }
