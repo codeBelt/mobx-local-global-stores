@@ -13,7 +13,7 @@ export const MainOverview: React.FC<IProps> = (props) => {
   });
 
   const show = data?.show;
-  const image: string = show?.image?.medium ?? '';
+  const image: string = show?.image ?? '';
   const network: string = show?.network?.name ?? '';
   const summary: string = show?.summary ?? '';
   const genres: string[] = show?.genres ?? [''];

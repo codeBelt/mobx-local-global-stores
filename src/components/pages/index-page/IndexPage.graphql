@@ -25,8 +25,6 @@ query GetShowDetailsAndCastByShowId($showId: String!) {
     network {
       name
     }
-    image {
-      medium
-    }
+    image
   }
 }

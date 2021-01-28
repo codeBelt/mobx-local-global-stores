@@ -1,10 +1,10 @@
-import { QueryResolvers, MutationResolvers, Auth } from './type-defs.graphqls'
-import { ResolverContext } from './apollo'
+import { QueryResolvers, MutationResolvers, Auth, Show, Resolvers } from './type-defs.graphqls'
 import { getUserRequest } from 'domains/auth/auth.services'
-import { getCastByShowId, getEpisodesByShowId, getShowByShowId } from './shows/shows.resolvers'
+import { getCastByShowId, getEpisodesByShowId } from './shows/shows.resolvers'
+import { showMapper } from './shows/shows.mappers'
 
-
-const Query: Required<QueryResolvers<ResolverContext>> = {
+const resolvers: Resolvers = {
+ Query: {
   auth(_parent, _args, _context, _info): Auth {
     return {
       isAuthenticated: false,
@@ -12,11 +12,18 @@ const Query: Required<QueryResolvers<ResolverContext>> = {
     }
   },
   cast: getCastByShowId,
-  show: getShowByShowId,
-  episodes: getEpisodesByShowId,
-}
+  // async (_parent, _args, _context, _info) => {
+  //   return  getCastByShowId(_args.showId),
 
-const Mutation: Required<MutationResolvers<ResolverContext>> = {
+  //   _context.dataSources.showsAPI.getCast(_args.showId);
+  // },
+  show: async (_parent, _args, _context, _info) => {
+    return _context.dataSources.showsAPI.getShowDetails(_args.showId);
+  },
+  episodes: getEpisodesByShowId,
+},
+Show: showMapper,
+Mutation: {
   signIn: async (_parent, _args, _context, _info): Promise<Auth> => {
     const randomUser = await getUserRequest()
 
@@ -25,6 +32,8 @@ const Mutation: Required<MutationResolvers<ResolverContext>> = {
       userFullName: `${randomUser.data?.results[0]?.name?.first} ${randomUser.data?.results[0]?.name?.last}`,
     }
   }
+},
 }
 
-export default { Query, Mutation }
+
+export default resolvers 

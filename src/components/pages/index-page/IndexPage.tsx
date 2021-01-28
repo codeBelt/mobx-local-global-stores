@@ -10,11 +10,13 @@ import { useGetShowDetailsAndCastByShowIdQuery } from './IndexPage.graphql';
 interface IProps {}
 
 export const IndexPage: React.FC<IProps> = observer((props) => {
-  const { loading } = useGetShowDetailsAndCastByShowIdQuery({
+  const { loading, error } = useGetShowDetailsAndCastByShowIdQuery({
     variables: {
       showId: defaultShowId,
     },
   });
+
+  console.log(error);
 
   return (
     <LoadingIndicator isActive={loading}>

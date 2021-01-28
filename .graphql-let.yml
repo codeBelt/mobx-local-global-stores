@@ -1,3 +1,8 @@
+# https://graphql-code-generator.com/
+# https://github.com/piglovesyou/graphql-let#experimental-feature-resolver-types
+# https://the-guild.dev/blog/better-type-safety-for-resolvers-with-graphql-codegen
+# https://graphql-code-generator.com/docs/plugins/typescript-resolvers#use-your-model-types-mappers
+
 schema: 'src/**/*.graphqls'
 schemaEntrypoint: 'src/lib/type-defs.graphqls'
 documents: 'src/**/*.graphql'
@@ -5,4 +10,10 @@ plugins:
   - typescript
   - typescript-operations
   - typescript-react-apollo
+  - typescript-resolvers
+config:
+  contextType: .lib/context.models#ContextModel
+  ./resolvers-types-valid.ts:
+    mappers:
+      Show: .lib/shows/shows.models#ShowModel
 cacheDir: __generated__

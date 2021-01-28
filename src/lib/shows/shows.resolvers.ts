@@ -1,7 +1,7 @@
 import { getCastsRequest, getEpisodesRequest, getShowRequest } from "domains/shows/shows.services"
-import { Cast, Episode, Show } from "lib/type-defs.graphqls"
+import { Cast, Episode, QueryCastArgs, QueryResolvers, QueryShowArgs, ResolversParentTypes, ResolverTypeWrapper, Show } from "lib/type-defs.graphqls"
 
-export const getCastByShowId = async (_parent, _args, _context, _info): Promise<Cast[]> => {
+export const getCastByShowId: QueryResolvers<Cast> = async (_parent, _args: QueryCastArgs, _context, _info): Promise<Cast[]> => {
   const castRequest = await getCastsRequest(_args.showId)
   
   const castOfShow = castRequest.data ?? []
@@ -27,32 +27,6 @@ export const getCastByShowId = async (_parent, _args, _context, _info): Promise<
       }
     }
   }))
-}
-
-export const getShowByShowId = async (_parent, _args, _context, _info): Promise<Show> => {
-  const showRequest = await getShowRequest(_args.showId)
-
-  const show: Show = showRequest.data ?? {} as Show
-  
-  return {
-    id: show.id ?? null,
-    name: show.name ?? '',
-    summary: show.summary ?? '',
-    genres: show.genres ?? [],
-    image: {
-      original: show.image?.original,
-      medium: show.image?.medium,
-    },
-    network: {
-      id: show.network?.id ?? null,
-      name: show?.network?.name ?? '',
-      country: {
-        name: show.network?.country?.name ?? '',
-        code: show.network?.country?.code ?? '',
-        timezone: show.network?.country?.timezone  ?? '',
-      }
-    }
-  }
 }
 
 export const getEpisodesByShowId = async (_parent, _args, _context, _info): Promise<Episode[]> => {

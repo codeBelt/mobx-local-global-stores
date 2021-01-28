@@ -51,7 +51,7 @@ type Show {
   summary: String!
   genres: [String!]
   network: Network!
-  image: Image!
+  image: String!
 }
 
 type Network {
