@@ -27,3 +27,22 @@ export type ShowModel = {
   image: ImageModel
 }
 
+export type PersonModel = {
+  id: number
+  name: String
+  birthday: String
+  image: ImageModel
+}
+
+export type CharacterModel = {
+  id: number
+  name: string
+  image: ImageModel
+}
+
+export type CastModel = {
+  person: PersonModel
+  character: CharacterModel
+  self: boolean
+  voice: boolean
+}

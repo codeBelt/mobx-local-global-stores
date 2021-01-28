@@ -28,7 +28,7 @@ type EpisodeTable {
 type Person {
   id: Int!
   name: String!
-  birthday: String!
+  birthday: String
   image: Image
 }
 

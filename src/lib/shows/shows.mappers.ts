@@ -1,5 +1,5 @@
 import { Show, ShowResolvers } from "lib/type-defs.graphqls";
-import { ShowModel } from "./shows.models";
+import { CastModel, ShowModel } from "./shows.models";
 
 // TODO: assign showMapper to ShowResolvers ?
 export const showMapper = {
@@ -15,6 +15,27 @@ export const showMapper = {
       name: (show: ShowModel) => show?.network?.country?.name ?? '',
       code: (show: ShowModel) => show?.network?.country?.code ?? '',
       timezone: (show: ShowModel) => show?.network?.country?.timezone  ?? '',
+    }
+  }
+}
+
+export const castMapper = {
+  self: (cast: CastModel) =>  cast.self,
+  person:  {
+    name: (cast: CastModel) => cast.person.name,
+    id: (cast: CastModel) => cast.person.id,
+    birthday: (cast: CastModel) => cast?.person?.birthday ?? '',
+    image:{
+      medium: (cast: CastModel) =>  cast.person.image.medium,
+      original: (cast: CastModel) =>  cast?.person?.image?.original
+    }
+  },
+  character: {
+    id: (cast: CastModel) => cast.character.id,
+    name: (cast: CastModel) => cast.character.name,
+    image: {
+      original: (cast: CastModel) =>  cast.character?.image?.original,
+      medium: (cast: CastModel) =>  cast?.character?.image?.medium,
     }
   }
 }

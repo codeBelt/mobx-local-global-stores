@@ -15,8 +15,12 @@ export class ShowsAPI extends RESTDataSource {
   }
 
   async getCast(showId: string): Promise<CastModel> {
-    return this.get(
+    const halp = await this.get(
       `${showId}/cast`, // path
     );
+
+    console.log(halp)
+
+    return halp
   }
 }
