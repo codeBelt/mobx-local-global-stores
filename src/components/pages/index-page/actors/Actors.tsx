@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import { Card } from 'semantic-ui-react';
 import { ActorCard } from './actor-card/ActorCard';
 import { ActorsSortOption } from './actors-sort-option/ActorsSortOption';
-import { defaultShowId } from 'domains/shows/shows.constants';
+import { defaultShowId } from 'constants/shows.constants';
 import { actorSortByVar } from '../IndexPage.state';
 import orderBy from 'lodash.orderby';
 import { useReactiveVar } from '@apollo/client';
-import { useGetShowDetailsAndCastByShowIdQuery } from '../IndexPage.graphql';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/getShowDetailsAndCastByShowId.graphql';
 
 interface IProps {}
 

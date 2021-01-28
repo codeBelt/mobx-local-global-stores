@@ -1,20 +1,21 @@
 import { ApolloCache, FetchResult } from '@apollo/client';
 import { toastSuccessMessage } from 'domains/toasts/toasts.utils';
 import { initializeApollo } from 'apollo/apolloClient';
-import { AuthDocument, AuthQuery, SignInMutation, SignInMutationResult } from './auth.graphql';
+import { GetAuthDocument, GetAuthQuery } from './getAuth.graphql';
+import { SignInMutation } from './signIn.graphql';
 
 export const signOut = () => {
   const client = initializeApollo();
 
   // Example of writing to the cache without using Reactive variables
-  client.cache.writeQuery<AuthQuery>({
+  client.cache.writeQuery<GetAuthQuery>({
     data: {
       auth: {
         isAuthenticated: false,
         userFullName: '',
       },
     },
-    query: AuthDocument,
+    query: GetAuthDocument,
   });
 };
 
@@ -22,14 +23,14 @@ export const signInUpdate = (cache: ApolloCache<SignInMutation>, { data }: Fetch
   toastSuccessMessage(`Welcome ${data?.signIn?.userFullName}`);
 
   // Example of writing to the cache without using Reactive variables
-  cache.writeQuery<AuthQuery>({
+  cache.writeQuery<GetAuthQuery>({
     data: {
       auth: {
         isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
         userFullName: data?.signIn?.userFullName ?? '',
       },
     },
-    query: AuthDocument,
+    query: GetAuthDocument,
   });
 };
 

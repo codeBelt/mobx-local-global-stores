@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoadingIndicator } from '../../ui/loading-indicator/LoadingIndicator';
 import { Container, Header, Message } from 'semantic-ui-react';
-import { useGetEpisodesByShowIdQuery } from '../episodes-page/EpisodesPage.graphql';
+import { useGetEpisodesByShowIdQuery } from 'domains/shows/getEpisodesByShowId.graphql';
 import { toastErrorMessage } from 'domains/toasts/toasts.utils';
 
 interface IProps {}

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { EpisodesTable } from './episodes-table/EpisodesTable';
 import { Container } from 'semantic-ui-react';
 import { EpisodesToggle } from './episodes-toggle/EpisodesToggle';
-import { Episode, useGetEpisodesByShowIdQuery } from './EpisodesPage.graphql';
+import { Episode, useGetEpisodesByShowIdQuery } from 'domains/shows/getEpisodesByShowId.graphql';
 import { generateAndSortTableData } from './EpisodesPage.utils';
 import { episodesSortByVar } from './EpisodesPage.state';
 import { useReactiveVar } from '@apollo/client';

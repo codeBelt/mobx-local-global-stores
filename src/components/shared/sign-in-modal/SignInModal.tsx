@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import { useAuthQuery, useSignInMutation } from 'domains/auth/auth.graphql';
+import { useGetAuthQuery } from 'domains/auth/getAuth.graphql';
+import { useSignInMutation } from 'domains/auth/signIn.graphql';
 import { signInUpdate } from 'domains/auth/auth.utils';
 
 export interface IProps {}
 
 export const SignInModal: React.FC<IProps> = (props) => {
-  const { data, loading, error } = useAuthQuery();
+  const { data, loading } = useGetAuthQuery();
 
   // Example of writing to the cache without using Reactive variables
   const [signIn] = useSignInMutation({

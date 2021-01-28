@@ -1,7 +1,7 @@
 import { toastErrorMessage } from 'domains/toasts/toasts.utils';
 import dayjs from 'dayjs';
 import groupBy from 'lodash.groupby';
-import { Episode } from './EpisodesPage.graphql';
+import { Episode } from '../../../domains/shows/getEpisodesByShowId.graphql';
 import { SortDirection } from 'constants/common.types';
 import orderBy from 'lodash.orderby';
 

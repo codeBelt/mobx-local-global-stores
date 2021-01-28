@@ -1,22 +1,14 @@
-import {
-  QueryResolvers,
-  MutationResolvers,
-  Auth,
-  Show,
-  Resolvers,
-  CastResolvers,
-  ShowResolvers,
-} from './type-defs.graphqls';
+import { Resolvers } from './type-defs.graphqls';
 import { getUserRequest } from 'domains/auth/auth.services';
 
 export const resolvers: Resolvers = {
   Query: {
-    auth(_parent, _args, _context, _info): Auth {
-      return {
-        isAuthenticated: false,
-        userFullName: '',
-      };
-    },
+    // auth(_parent, _args, _context, _info): Auth {
+    //   return {
+    //     isAuthenticated: false,
+    //     userFullName: '',
+    //   };
+    // },
     cast: async (_parent, _args, _context, _info) => {
       return _context.dataSources.showsAPI.getCast(_args.showId);
     },
@@ -28,7 +20,7 @@ export const resolvers: Resolvers = {
     },
   },
   Mutation: {
-    signIn: async (_parent, _args, _context, _info): Promise<Auth> => {
+    signIn: async (_parent, _args, _context, _info) => {
       const randomUser = await getUserRequest();
 
       return {

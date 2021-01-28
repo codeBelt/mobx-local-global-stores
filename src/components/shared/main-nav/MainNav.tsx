@@ -2,9 +2,9 @@ import React from 'react';
 import { Menu, Segment, Grid, Button, Label, Icon } from 'semantic-ui-react';
 import NextLink from 'next/link';
 import { Routes, RoutesDynamicKey } from 'constants/Routes';
-import { defaultShowId } from 'domains/shows/shows.constants';
+import { defaultShowId } from 'constants/shows.constants';
 import { useRouter } from 'next/router';
-import { useAuthQuery } from 'domains/auth/auth.graphql';
+import { useGetAuthQuery } from 'domains/auth/getAuth.graphql';
 import { signOut } from 'domains/auth/auth.utils';
 
 interface IProps {}
@@ -12,7 +12,7 @@ interface IProps {}
 export const MainNav: React.FC<IProps> = (props) => {
   const router = useRouter();
 
-  const { data, loading, error } = useAuthQuery();
+  const { data, loading, error } = useGetAuthQuery();
 
   return (
     <Segment inverted={true}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
-import { useGetShowDetailsAndCastByShowIdQuery } from '../IndexPage.graphql';
-import { defaultShowId } from 'domains/shows/shows.constants';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/getShowDetailsAndCastByShowId.graphql';
+import { defaultShowId } from 'constants/shows.constants';
 
 interface IProps {}
 
