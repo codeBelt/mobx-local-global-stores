@@ -40,6 +40,8 @@ export const AuthGlobalStore = (globalStore: GlobalStore) =>
 
       if (this.user) {
         globalStore.toastStore.enqueueToast(`Welcome ${this.userFullName}`, 'success');
+      } else {
+        globalStore.toastStore.enqueueToast('Sign In Issue. Try Again.', 'error');
       }
     },
 
