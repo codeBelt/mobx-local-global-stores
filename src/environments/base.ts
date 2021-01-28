@@ -11,6 +11,7 @@ export default function baseEnv(baseApi: string) {
       episodes: `${baseApi}/shows/:showId/episodes`,
       shows: `${baseApi}/shows/:showId`,
       showsBase: `${baseApi}/shows`,
+      userBase: `https://randomuser.me/api`,
       user: `https://randomuser.me/api/?inc=gender,name`,
       errorExample: 'https://httpstat.us/418',
     },

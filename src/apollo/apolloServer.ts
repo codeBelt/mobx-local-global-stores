@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { ShowsAPI } from './shows/shows.datasource';
+import { AuthenticationAPI } from './auth/auth.datasource';
 import { schema } from './schema';
 
 export const apolloServer = new ApolloServer({
@@ -7,6 +8,7 @@ export const apolloServer = new ApolloServer({
   dataSources: () => {
     return {
       showsAPI: new ShowsAPI(),
+      authAPI: new AuthenticationAPI(),
     };
   },
   context: () => {

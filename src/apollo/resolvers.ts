@@ -1,5 +1,4 @@
 import { Resolvers } from './type-defs.graphqls';
-import { getUserRequest } from 'domains/auth/auth.services';
 
 export const resolvers: Resolvers = {
   Query: {
@@ -21,12 +20,15 @@ export const resolvers: Resolvers = {
   },
   Mutation: {
     signIn: async (_parent, _args, _context, _info) => {
-      const randomUser = await getUserRequest();
-
-      return {
-        isAuthenticated: Boolean(randomUser.data),
-        userFullName: `${randomUser.data?.results[0]?.name?.first} ${randomUser.data?.results[0]?.name?.last}`,
-      };
+      return _context.dataSources.authAPI.authenticateUser();
     },
+    // signIn: async (_parent, _args, _context, _info) => {
+    //   const randomUser = await getUserRequest();
+
+    //   return {
+    //     isAuthenticated: Boolean(randomUser.data),
+    //     userFullName: `${randomUser.data?.results[0]?.name?.first} ${randomUser.data?.results[0]?.name?.last}`,
+    //   };
+    // },
   },
 };

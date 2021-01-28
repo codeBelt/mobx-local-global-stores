@@ -12,7 +12,7 @@ interface IProps {}
 export const MainNav: React.FC<IProps> = (props) => {
   const router = useRouter();
 
-  const { data, loading, error } = useGetAuthQuery();
+  const { data } = useGetAuthQuery();
 
   return (
     <Segment inverted={true}>
