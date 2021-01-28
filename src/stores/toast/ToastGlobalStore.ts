@@ -10,14 +10,12 @@ export const ToastGlobalStore = (globalStore: GlobalStore) =>
     enqueueToast(message: string, variantType: VariantType) {
       const keyId = new Date().toString();
 
-      runInAction(() => {
-        this.notifications.push({
-          message,
-          options: {
-            key: keyId,
-            variant: variantType as VariantType,
-          },
-        });
+      this.notifications.push({
+        message,
+        options: {
+          key: keyId,
+          variant: variantType as VariantType,
+        },
       });
     },
 
