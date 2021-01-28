@@ -15,4 +15,3 @@ export const apolloServer = new ApolloServer({
     };
   },
 });
-

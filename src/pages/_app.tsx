@@ -10,7 +10,7 @@ import { SnackbarProvider } from 'notistack';
 import { ToastNotifier } from '../components/ui/toast-notifier/ToastNotifier';
 import { SignInModalDynamic } from '../components/shared/sign-in-modal/SignInModal.dynamic';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apolloClient';
+import { useApollo } from '../server/apolloClient';
 
 NProgress.configure({ showSpinner: false, minimum: 0.1 });
 Router.events.on('routeChangeStart', () => NProgress.start());

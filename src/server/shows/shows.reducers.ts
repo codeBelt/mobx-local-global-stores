@@ -1,5 +1,5 @@
-import { Cast, Episode, Show } from "lib/type-defs.graphqls";
-import { CastModel, EpisodeModel, ShowModel } from "./shows.models";
+import { Cast, Episode, Show } from 'lib/type-defs.graphqls';
+import { CastModel, EpisodeModel, ShowModel } from './shows.models';
 
 export const showReducer = (show: ShowModel): Show => {
   return {
@@ -14,24 +14,24 @@ export const showReducer = (show: ShowModel): Show => {
       country: {
         name: show?.network?.country?.name ?? '',
         code: show?.network?.country?.code ?? '',
-        timezone:show?.network?.country?.timezone  ?? '',
-      }
-    }
-  }
-} 
+        timezone: show?.network?.country?.timezone ?? '',
+      },
+    },
+  };
+};
 
 export const castReducer = (cast: CastModel[]): Cast[] => {
-  return cast.map(castMember => ({
+  return cast.map((castMember) => ({
     self: castMember.self,
     voice: castMember.voice,
-    person:  {
+    person: {
       name: castMember.person.name,
       id: castMember.person.id,
       birthday: castMember?.person?.birthday ?? '',
       image: {
         medium: castMember.person.image.medium,
-        original: castMember?.person?.image?.original
-      }
+        original: castMember?.person?.image?.original,
+      },
     },
     character: {
       id: castMember.character.id,
@@ -39,13 +39,13 @@ export const castReducer = (cast: CastModel[]): Cast[] => {
       image: {
         original: castMember.character?.image?.original,
         medium: castMember?.character?.image?.medium,
-      }
-    }
-  }))
-}
+      },
+    },
+  }));
+};
 
 export const episodeReducer = (episodes: EpisodeModel[]): Episode[] => {
-  return episodes.map(episode => ({
+  return episodes.map((episode) => ({
     id: episode.id,
     season: episode.season,
     name: episode.name,
@@ -54,6 +54,6 @@ export const episodeReducer = (episodes: EpisodeModel[]): Episode[] => {
     image: {
       medium: episode.image.medium ?? '',
     },
-    summary:episode.summary,
-  }))
-}
+    summary: episode.summary,
+  }));
+};
