@@ -33,18 +33,3 @@ export const signInUpdate = (cache: ApolloCache<SignInMutation>, { data }: Fetch
     query: GetAuthDocument,
   });
 };
-
-// export const signIn = ( data: any) => {
-
-//   const client = initializeApollo()
-
-//   client.cache.writeQuery<AuthQuery>({
-//     data: {
-//       auth: {
-//         isAuthenticated: Boolean(data?.signIn?.isAuthenticated),
-//         userFullName: data?.signIn?.userFullName ?? '',
-//       },
-//     },
-//     query: AuthDocument,
-//   });
-// }
