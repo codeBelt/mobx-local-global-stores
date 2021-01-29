@@ -2,12 +2,6 @@ import { Resolvers } from './type-defs.graphqls';
 
 export const resolvers: Resolvers = {
   Query: {
-    // auth(_parent, _args, _context, _info): Auth {
-    //   return {
-    //     isAuthenticated: false,
-    //     userFullName: '',
-    //   };
-    // },
     cast: async (_parent, _args, _context, _info) => {
       return _context.dataSources.showsAPI.getCast(_args.showId);
     },
@@ -22,13 +16,5 @@ export const resolvers: Resolvers = {
     signIn: async (_parent, _args, _context, _info) => {
       return _context.dataSources.authAPI.authenticateUser();
     },
-    // signIn: async (_parent, _args, _context, _info) => {
-    //   const randomUser = await getUserRequest();
-
-    //   return {
-    //     isAuthenticated: Boolean(randomUser.data),
-    //     userFullName: `${randomUser.data?.results[0]?.name?.first} ${randomUser.data?.results[0]?.name?.last}`,
-    //   };
-    // },
   },
 };
