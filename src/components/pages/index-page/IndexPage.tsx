@@ -3,7 +3,7 @@ import { Divider, Header, Icon } from 'semantic-ui-react';
 import { LoadingIndicator } from '../../ui/loading-indicator/LoadingIndicator';
 import { MainOverview } from './main-overview/MainOverview';
 import { Actors } from './actors/Actors';
-import { defaultShowId } from 'constants/shows.constants';
+import { defaultShowId } from 'domains/shows/shows.constants';
 import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/getShowDetailsAndCastByShowId.graphql';
 
 interface IProps {}
