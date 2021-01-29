@@ -4,15 +4,11 @@
  * https://blog.usejournal.com/my-awesome-custom-react-environment-variables-setup-8ebb0797d8ac
  */
 
-export default function baseEnv(baseApi: string) {
+export default function baseEnv() {
   return {
     api: {
-      cast: `${baseApi}/shows/:showId/cast`,
-      episodes: `${baseApi}/shows/:showId/episodes`,
-      shows: `${baseApi}/shows/:showId`,
-      showsBase: `${baseApi}/shows`,
+      showsBase: `https://api.tvmaze.com/shows/`,
       userBase: `https://randomuser.me/api`,
-      user: `https://randomuser.me/api/?inc=gender,name`,
       errorExample: 'https://httpstat.us/418',
     },
 

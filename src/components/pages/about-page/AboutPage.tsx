@@ -22,10 +22,9 @@ export const AboutPage: React.FC<IProps> = (props) => {
       <Header as="h2">About</Header>
       <LoadingIndicator isActive={loading}>
         <Container>
-          <p>
-            This page is only to show how to handle API errors on the page. You will also notice a popup indicator with
-            the actual error text. Below we create a custom error message.
-          </p>
+          <p>This page is only to show how to handle API errors on the page.</p>
+          <p>You will also notice a popup indicator with the actual error text.</p>
+          <p>Below we create a custom error message.</p>
         </Container>
         {Boolean(error) && (
           <Message info={true} header="Error" content="Sorry there was an error requesting this content." />
