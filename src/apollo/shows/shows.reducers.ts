@@ -1,4 +1,4 @@
-import { Cast, Episode, Show } from 'lib/type-defs.graphqls';
+import { Cast, Episode, Show } from 'apollo/type-defs.graphqls';
 import { CastModel, EpisodeModel, ShowModel } from './shows.models';
 
 export const showReducer = (show: ShowModel): Show => {
