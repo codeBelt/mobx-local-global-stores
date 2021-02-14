@@ -5,8 +5,6 @@ import { ICast, IShow } from '../../../domains/shows/shows.types';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import orderBy from 'lodash.orderby';
-import { persistence, StorageAdapter } from 'mobx-persist-store';
-import environment from 'environment';
 
 export class IndexPageStore {
   // globalStore: getGlobalStore(),
@@ -58,36 +56,3 @@ export class IndexPageStore {
     };
   }
 }
-export default persistence({
-  name: 'IndexPageStore',
-  properties: ['castsResults'],
-  reactionOptions: {
-    // optional
-    delay: 2000,
-  },
-  adapter: new StorageAdapter({
-    read: (name: string) => {
-      console.log(`name`, name);
-      return new Promise((resolve) => {
-        let data = {};
-
-        if (environment.isBrowser) {
-          data = window.localStorage.getItem(name) || { none: 'asd' };
-        }
-
-        // console.log(`data`, data);
-        resolve(JSON.parse(data || { none: 'asd' }));
-      });
-    },
-    write: (name, content) => {
-      // console.log(`name, content`, name, content);
-      return new Promise((resolve) => {
-        if (environment.isBrowser) {
-          window.localStorage.setItem(name, JSON.stringify(content));
-        }
-
-        resolve();
-      });
-    },
-  }),
-})(new IndexPageStore());
