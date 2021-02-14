@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { getCastsRequest, getShowRequest } from '../../../domains/shows/shows.services';
-import { initialResponseStatus } from '../../../utils/mobx.utils';
+import { initialResponseStatus, persistStore } from '../../../utils/mobx.utils';
 import { ICast, IShow } from '../../../domains/shows/shows.types';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
@@ -56,3 +56,7 @@ export class IndexPageStore {
     };
   }
 }
+
+export const persistIndexPageStore = () => {
+  return persistStore(new IndexPageStore(), ['castsResults', 'showResults', 'sortValue'], 'IndexPageStore');
+};

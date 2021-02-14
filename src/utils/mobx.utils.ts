@@ -23,32 +23,27 @@ export const initialResponseStatus = <T, E = IApiError>(
 
 export const persistStore = <T extends { [key: string]: any }, K extends keyof T>(
   target: T,
-  properties: K[]
+  properties: K[],
+  name: string
 ): T | PersistenceStore<T> => {
   if (environment.isServer) {
     return target;
   }
 
   return persistence({
-    name: 'IndexPageStore',
+    name: name,
     properties: properties as string[],
     adapter: new StorageAdapter({
-      read: (name: string) => {
-        return new Promise((resolve) => {
-          const data = window.localStorage.getItem(name);
+      read: async (name: string) => {
+        const data = window.localStorage.getItem(name);
 
-          resolve(JSON.parse(data));
-        });
+        return JSON.parse(data);
       },
-      write: (name, content) => {
-        return new Promise((resolve) => {
-          window.localStorage.setItem(name, JSON.stringify(content));
-          resolve();
-        });
+      write: async (name, content) => {
+        window.localStorage.setItem(name, JSON.stringify(content));
       },
     }),
     reactionOptions: {
-      // optional
       delay: 2000,
     },
   })(target);
