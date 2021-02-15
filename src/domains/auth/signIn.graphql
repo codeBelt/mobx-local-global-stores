@@ -1,0 +1,6 @@
+mutation SignIn($name: String) {
+  signIn(name: $name) {
+    isAuthenticated
+    userFullName
+  }
+}

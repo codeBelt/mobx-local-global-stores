@@ -7,10 +7,8 @@
 export default function baseEnv() {
   return {
     api: {
-      cast: 'https://api.tvmaze.com/shows/:showId/cast',
-      episodes: 'https://api.tvmaze.com/shows/:showId/episodes',
-      shows: 'https://api.tvmaze.com/shows/:showId',
-      user: 'https://randomuser.me/api/?inc=gender,name',
+      showsBase: `https://api.tvmaze.com/shows/`,
+      userBase: `https://randomuser.me/api`,
       errorExample: 'https://httpstat.us/418',
     },
 

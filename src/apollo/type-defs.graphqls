@@ -1,0 +1,11 @@
+type Query {
+  auth: Auth!
+  toastItems: [ToastNotification]
+  cast(showId: String!): [Cast!]
+  show(showId: String!): Show
+  episodes(showId: String!): [Episode]
+}
+
+type Mutation {
+  signIn(name: String): Auth!
+}

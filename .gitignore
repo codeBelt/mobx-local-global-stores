@@ -33,3 +33,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# graphql generated files
+**/*/*.graphql.d.ts
+**/*/*.graphqls.d.ts
+**/*/*.graphql.tsx
+**/*/*.graphqls.tsx

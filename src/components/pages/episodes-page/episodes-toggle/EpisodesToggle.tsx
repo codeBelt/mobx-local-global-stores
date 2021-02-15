@@ -1,33 +1,39 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { useLocalStore } from '../../../shared/local-store-provider/LocalStoreProvider';
-import { EpisodesPageStore } from '../EpisodesPage.store';
-import { EpisodesToggleOption } from './EpisodesToggle.constants';
-import { observer } from 'mobx-react-lite';
+import { episodesSortByVar } from '../EpisodesPage.state';
+import { useReactiveVar } from '@apollo/client';
+import { SortDirection } from 'constants/common.types';
+import { toastSuccessMessage } from 'domains/toasts/toasts.utils';
 
 export interface IProps {}
 
-export const EpisodesToggle: React.FC<IProps> = observer((props) => {
-  const localStore = useLocalStore<EpisodesPageStore>();
+export const EpisodesToggle: React.FC<IProps> = (props) => {
+  const sortBy = useReactiveVar(episodesSortByVar);
 
   return (
     <Button.Group>
       <Button
-        positive={localStore.sortType === EpisodesToggleOption.ASC}
-        onClick={() => localStore.setSortType(EpisodesToggleOption.ASC)}
+        positive={sortBy === SortDirection.ASCENDING}
+        onClick={() => {
+          toastSuccessMessage('You sorted seasons ascending');
+          episodesSortByVar(SortDirection.ASCENDING);
+        }}
       >
         Seasons Ascending
       </Button>
       <Button.Or />
       <Button
-        positive={localStore.sortType === EpisodesToggleOption.DESC}
-        onClick={() => localStore.setSortType(EpisodesToggleOption.DESC)}
+        positive={sortBy === SortDirection.DESCENDING}
+        onClick={() => {
+          toastSuccessMessage('You sorted seasons descending');
+          episodesSortByVar(SortDirection.DESCENDING);
+        }}
       >
         Seasons Descending
       </Button>
     </Button.Group>
   );
-});
+};
 
 EpisodesToggle.displayName = 'EpisodesToggle';
 EpisodesToggle.defaultProps = {};

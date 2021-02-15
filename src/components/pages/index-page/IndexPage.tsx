@@ -3,17 +3,20 @@ import { Divider, Header, Icon } from 'semantic-ui-react';
 import { LoadingIndicator } from '../../ui/loading-indicator/LoadingIndicator';
 import { MainOverview } from './main-overview/MainOverview';
 import { Actors } from './actors/Actors';
-import { observer } from 'mobx-react-lite';
-import { IndexPageStore } from './IndexPage.store';
-import { useLocalStore } from '../../shared/local-store-provider/LocalStoreProvider';
+import { defaultShowId } from 'domains/shows/shows.constants';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/getShowDetailsAndCastByShowId.graphql';
 
 interface IProps {}
 
-export const IndexPage: React.FC<IProps> = observer((props) => {
-  const localStore = useLocalStore<IndexPageStore>();
+export const IndexPage: React.FC<IProps> = (props) => {
+  const { loading } = useGetShowDetailsAndCastByShowIdQuery({
+    variables: {
+      showId: defaultShowId,
+    },
+  });
 
   return (
-    <LoadingIndicator isActive={localStore.isRequesting}>
+    <LoadingIndicator isActive={loading}>
       <MainOverview />
       <Divider horizontal={true}>
         <Header as="h4">
@@ -23,7 +26,7 @@ export const IndexPage: React.FC<IProps> = observer((props) => {
       <Actors />
     </LoadingIndicator>
   );
-});
+};
 
 IndexPage.displayName = 'IndexPage';
 IndexPage.defaultProps = {};

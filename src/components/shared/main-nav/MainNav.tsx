@@ -1,17 +1,18 @@
 import React from 'react';
 import { Menu, Segment, Grid, Button, Label, Icon } from 'semantic-ui-react';
 import NextLink from 'next/link';
-import { Routes, RoutesDynamicKey } from '../../../constants/Routes.constants';
-import { defaultShowId } from '../../../domains/shows/shows.constants';
+import { Routes, RoutesDynamicKey } from 'constants/Routes.constants';
+import { defaultShowId } from 'domains/shows/shows.constants';
 import { useRouter } from 'next/router';
-import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
-import { observer } from 'mobx-react-lite';
+import { useGetAuthQuery } from 'domains/auth/getAuth.graphql';
+import { signOut } from 'domains/auth/auth.utils';
 
 interface IProps {}
 
-export const MainNav: React.FC<IProps> = observer((props) => {
+export const MainNav: React.FC<IProps> = (props) => {
   const router = useRouter();
-  const { authStore } = useGlobalStore();
+
+  const { data } = useGetAuthQuery();
 
   return (
     <Segment inverted={true}>
@@ -29,13 +30,13 @@ export const MainNav: React.FC<IProps> = observer((props) => {
             </NextLink>
           </Menu>
         </Grid.Column>
-        {authStore.isAuthenticated && (
+        {data?.auth?.isAuthenticated && (
           <Grid.Column textAlign="right">
             <Button as="div" labelPosition="left">
               <Label basic={true} pointing="right">
-                {authStore.userFullName}
+                {data?.auth?.userFullName}
               </Label>
-              <Button icon={true} onClick={() => authStore.signOut()}>
+              <Button icon={true} onClick={() => signOut()}>
                 Sign Out <Icon name="share square outline" />
               </Button>
             </Button>
@@ -44,7 +45,7 @@ export const MainNav: React.FC<IProps> = observer((props) => {
       </Grid>
     </Segment>
   );
-});
+};
 
 MainNav.displayName = 'MainNav';
 MainNav.defaultProps = {};

@@ -1,0 +1,4 @@
+type Auth {
+  isAuthenticated: Boolean!
+  userFullName: String!
+}

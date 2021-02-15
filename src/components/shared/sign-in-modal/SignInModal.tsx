@@ -1,15 +1,21 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import { useGlobalStore } from '../global-store-provider/GlobalStoreProvider';
-import { observer } from 'mobx-react-lite';
+import { useGetAuthQuery } from 'domains/auth/getAuth.graphql';
+import { useSignInMutation } from 'domains/auth/signIn.graphql';
+import { signInUpdate } from 'domains/auth/auth.utils';
 
 export interface IProps {}
 
-export const SignInModal: React.FC<IProps> = observer((props) => {
-  const { authStore } = useGlobalStore();
+export const SignInModal: React.FC<IProps> = (props) => {
+  const { data, loading } = useGetAuthQuery();
+
+  // Example of writing to the cache without using Reactive variables
+  const [signIn] = useSignInMutation({
+    update: signInUpdate,
+  });
 
   return (
-    <Modal closeOnDimmerClick={false} closeOnEscape={false} open={!authStore.isAuthenticated} size={'tiny'}>
+    <Modal closeOnDimmerClick={false} closeOnEscape={false} open={!data?.auth?.isAuthenticated} size={'tiny'}>
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content>
         <p>Welcome, please sign in.</p>
@@ -19,15 +25,15 @@ export const SignInModal: React.FC<IProps> = observer((props) => {
           content="Sign In"
           labelPosition="right"
           icon="sign in"
-          onClick={() => authStore.signIn()}
+          onClick={() => signIn()}
           positive={true}
-          disabled={authStore.authResults.isRequesting}
-          loading={authStore.authResults.isRequesting}
+          disabled={loading}
+          loading={loading}
         />
       </Modal.Actions>
     </Modal>
   );
-});
+};
 
 SignInModal.displayName = 'SignInModal';
 SignInModal.defaultProps = {};

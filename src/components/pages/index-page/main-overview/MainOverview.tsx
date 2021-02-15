@@ -1,18 +1,22 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
-import { observer } from 'mobx-react-lite';
-import { IndexPageStore } from '../IndexPage.store';
-import { useLocalStore } from '../../../shared/local-store-provider/LocalStoreProvider';
+import { useGetShowDetailsAndCastByShowIdQuery } from 'domains/shows/getShowDetailsAndCastByShowId.graphql';
+import { defaultShowId } from 'domains/shows/shows.constants';
 
 interface IProps {}
 
-export const MainOverview: React.FC<IProps> = observer((props) => {
-  const localStore = useLocalStore<IndexPageStore>();
+export const MainOverview: React.FC<IProps> = (props) => {
+  const { data } = useGetShowDetailsAndCastByShowIdQuery({
+    variables: {
+      showId: defaultShowId,
+    },
+  });
 
-  const show = localStore.showResults.data;
-  const image: string = show?.image?.medium ?? '';
+  const show = data?.show;
+  const image: string = show?.image ?? '';
   const network: string = show?.network?.name ?? '';
   const summary: string = show?.summary ?? '';
+  const genres: string[] = show?.genres ?? [''];
 
   return (
     <Item.Group>
@@ -24,12 +28,12 @@ export const MainOverview: React.FC<IProps> = observer((props) => {
           <Item.Description>
             <div dangerouslySetInnerHTML={{ __html: summary }} />
           </Item.Description>
-          <Item.Extra>{show?.genres.join(' | ')}</Item.Extra>
+          <Item.Extra>{genres.join(' | ')}</Item.Extra>
         </Item.Content>
       </Item>
     </Item.Group>
   );
-});
+};
 
 MainOverview.displayName = 'MainOverview';
 MainOverview.defaultProps = {};

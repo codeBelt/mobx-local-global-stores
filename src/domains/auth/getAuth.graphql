@@ -1,0 +1,6 @@
+query GetAuth {
+  auth @client {
+    isAuthenticated
+    userFullName
+  }
+}
