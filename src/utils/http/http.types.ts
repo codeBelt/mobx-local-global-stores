@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 export type SuccessfulResponse<T> = { data: T; error?: never; statusCode?: number };
 export type UnsuccessfulResponse<E> = { data?: never; error: E; statusCode?: number };
 
@@ -6,3 +8,5 @@ export interface IApiError {
 }
 
 export type ApiResponse<T, E = IApiError> = SuccessfulResponse<T> | UnsuccessfulResponse<E>;
+
+export type AxiosRequestCacheRequest = Pick<AxiosRequestConfig, 'cache' | 'forceUpdate'>;

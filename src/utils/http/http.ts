@@ -1,6 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiResponse, IApiError } from './http.types';
 import { HttpVerbs } from './http.constants';
+import { cacheAdapterEnhancer } from 'axios-extensions';
+
+const axiosWithCache = axios.create({
+  adapter: cacheAdapterEnhancer(axios.defaults.adapter!, { enabledByDefault: false }),
+});
 
 const httpRequest = async <T>(
   method: HttpVerbs,
@@ -21,7 +26,7 @@ const httpRequest = async <T>(
   };
 
   try {
-    const response: AxiosResponse<T> = await axios(requestConfig);
+    const response: AxiosResponse<T> = await axiosWithCache(requestConfig);
 
     return { data: response.data, statusCode: response.status };
   } catch (error) {

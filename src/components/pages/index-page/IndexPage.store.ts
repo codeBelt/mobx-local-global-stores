@@ -33,7 +33,7 @@ export const IndexPageStore = () =>
     },
 
     *loadShow() {
-      const response: ApiResponse<IShow> = yield getShowRequest(defaultShowId);
+      const response: ApiResponse<IShow> = yield getShowRequest(defaultShowId, { cache: true, forceUpdate: false });
 
       this.showResults = {
         data: this.showResults.data,
