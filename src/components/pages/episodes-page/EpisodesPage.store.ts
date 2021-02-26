@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import groupBy from 'lodash.groupby';
 import orderBy from 'lodash.orderby';
 import { IEpisode, IEpisodeTable } from '../../../domains/shows/shows.types';
@@ -7,41 +7,44 @@ import { ApiResponse } from '../../../utils/http/http.types';
 import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 import { EpisodesToggleOption } from './episodes-toggle/EpisodesToggle.constants';
 
-export const EpisodesPageStore = (episodesResults: ApiResponse<IEpisode[]>) =>
-  observable({
-    globalStore: getGlobalStore(),
-    sortType: EpisodesToggleOption.ASC,
-    episodesResults: episodesResults,
+export class EpisodesPageStore {
+  readonly globalStore = getGlobalStore();
+  sortType = EpisodesToggleOption.ASC;
+  episodesResults: ApiResponse<IEpisode[]>;
 
-    get sortedTableData(): IEpisodeTable[] {
-      return orderBy(this.generateTableData, 'title', this.sortType);
-    },
+  constructor(episodesResults: ApiResponse<IEpisode[]>) {
+    this.episodesResults = episodesResults;
 
-    get generateTableData(): IEpisodeTable[] {
-      if (this.episodesResults.error) {
-        return [];
-      }
+    makeAutoObservable(this);
+  }
 
-      const seasons: { [season: string]: IEpisode[] } = groupBy(this.episodesResults.data, 'season');
+  get sortedTableData(): IEpisodeTable[] {
+    return orderBy(this.generateTableData, 'title', this.sortType);
+  }
 
-      return Object.entries(seasons).map(([season, models]) => {
-        return {
-          title: `Season ${season}`,
-          rows: models.map((model) => ({
-            episode: model.number,
-            name: model.name,
-            date: dayjs(model.airdate).format('MMM D, YYYY'),
-            image: model.image?.medium ?? '',
-          })),
-        };
-      });
-    },
+  get generateTableData(): IEpisodeTable[] {
+    if (this.episodesResults.error) {
+      return [];
+    }
 
-    setSortType(sortType: EpisodesToggleOption): void {
-      this.sortType = sortType;
+    const seasons: { [season: string]: IEpisode[] } = groupBy(this.episodesResults.data, 'season');
 
-      this.globalStore.toastStore.enqueueToast('Nice! You just sorted Server-Side Rendered Content.', 'info');
-    },
-  });
+    return Object.entries(seasons).map(([season, models]) => {
+      return {
+        title: `Season ${season}`,
+        rows: models.map((model) => ({
+          episode: model.number,
+          name: model.name,
+          date: dayjs(model.airdate).format('MMM D, YYYY'),
+          image: model.image?.medium ?? '',
+        })),
+      };
+    });
+  }
 
-export type EpisodesPageStore = ReturnType<typeof EpisodesPageStore>;
+  setSortType(sortType: EpisodesToggleOption): void {
+    this.sortType = sortType;
+
+    this.globalStore.toastStore.enqueueToast('Nice! You just sorted Server-Side Rendered Content.', 'info');
+  }
+}
