@@ -8,7 +8,7 @@ import { getGlobalStore } from '../../shared/global-store-provider/GlobalStorePr
 import { EpisodesToggleOption } from './episodes-toggle/EpisodesToggle.constants';
 
 export class EpisodesPageStore {
-  globalStore = getGlobalStore();
+  readonly globalStore = getGlobalStore();
   sortType = EpisodesToggleOption.ASC;
   episodesResults: ApiResponse<IEpisode[]>;
 

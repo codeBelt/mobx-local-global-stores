@@ -5,9 +5,10 @@ import { ICast, IShow } from '../../../domains/shows/shows.types';
 import { ApiResponse } from '../../../utils/http/http.types';
 import { defaultShowId } from '../../../domains/shows/shows.constants';
 import orderBy from 'lodash.orderby';
+import { getGlobalStore } from '../../shared/global-store-provider/GlobalStoreProvider';
 
 export class IndexPageStore {
-  // globalStore: getGlobalStore(),
+  readonly globalStore = getGlobalStore();
   sortValue = '';
   showResults = initialResponseStatus<IShow | null>(null);
   castsResults = initialResponseStatus<ICast[]>([]);

@@ -4,9 +4,12 @@ import { IToastNotification } from '../../components/ui/toast-notifier/ToastNoti
 import { VariantType } from 'notistack';
 
 export class ToastGlobalStore {
+  readonly globalStore: GlobalStore;
   notifications = ([] as unknown) as IObservableArray<IToastNotification>;
 
   constructor(globalStore: GlobalStore) {
+    this.globalStore = globalStore;
+
     makeAutoObservable(this);
   }
 

@@ -8,7 +8,7 @@ import { IUser, IUserResponse } from '../../domains/auth/auth.types';
 import Router from 'next/router';
 
 export class AuthGlobalStore {
-  globalStore: GlobalStore;
+  readonly globalStore: GlobalStore;
   authResults = initialResponseStatus<IUserResponse | null>(null, false);
 
   constructor(globalStore: GlobalStore) {
