@@ -19,8 +19,8 @@ export default class GlobalStore {
   readonly toastStore: ToastGlobalStore;
 
   constructor() {
-    this.authStore = AuthGlobalStore(this);
-    this.toastStore = ToastGlobalStore(this);
+    this.authStore = new AuthGlobalStore(this);
+    this.toastStore = new ToastGlobalStore(this);
   }
 
   async hydrate(initialState?: Partial<GlobalStore>) {

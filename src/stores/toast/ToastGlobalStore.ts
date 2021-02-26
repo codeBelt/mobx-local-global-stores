@@ -1,29 +1,33 @@
-import { IObservableArray, observable, runInAction } from 'mobx';
+import { IObservableArray, makeAutoObservable, runInAction } from 'mobx';
 import GlobalStore from '../GlobalStore';
 import { IToastNotification } from '../../components/ui/toast-notifier/ToastNotifier.types';
 import { VariantType } from 'notistack';
 
-export const ToastGlobalStore = (globalStore: GlobalStore) =>
-  observable({
-    notifications: ([] as unknown) as IObservableArray<IToastNotification>,
+export class ToastGlobalStore {
+  readonly globalStore: GlobalStore;
+  notifications = ([] as unknown) as IObservableArray<IToastNotification>;
 
-    enqueueToast(message: string, variantType: VariantType) {
-      const keyId = new Date().toString();
+  constructor(globalStore: GlobalStore) {
+    this.globalStore = globalStore;
 
-      this.notifications.push({
-        message,
-        options: {
-          key: keyId,
-          variant: variantType as VariantType,
-        },
-      });
-    },
+    makeAutoObservable(this);
+  }
 
-    removeToast(notification: IToastNotification) {
-      runInAction(() => {
-        this.notifications.remove(notification);
-      });
-    },
-  });
+  enqueueToast(message: string, variantType: VariantType) {
+    const keyId = new Date().toString();
 
-export type ToastGlobalStore = ReturnType<typeof ToastGlobalStore>;
+    this.notifications.push({
+      message,
+      options: {
+        key: keyId,
+        variant: variantType as VariantType,
+      },
+    });
+  }
+
+  removeToast(notification: IToastNotification) {
+    runInAction(() => {
+      this.notifications.remove(notification);
+    });
+  }
+}
