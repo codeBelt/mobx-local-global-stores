@@ -37,14 +37,16 @@ export const persistStore = <T extends { [key: string]: any }, K extends keyof T
       read: async (name: string) => {
         const data = window.localStorage.getItem(name);
 
-        return JSON.parse(data);
+        return data ? JSON.parse(data) : undefined;
       },
       write: async (name, content) => {
         window.localStorage.setItem(name, JSON.stringify(content));
+
+        return undefined;
       },
     }),
     reactionOptions: {
-      delay: 2000,
+      delay: 200,
     },
   })(target);
 };

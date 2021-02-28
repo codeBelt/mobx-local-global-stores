@@ -15,6 +15,8 @@ export class IndexPageStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    persistStore(this, ['castsResults', 'showResults', 'sortValue'], 'IndexPageStore');
   }
 
   get isRequesting(): boolean {
@@ -56,7 +58,3 @@ export class IndexPageStore {
     };
   }
 }
-
-export const persistIndexPageStore = () => {
-  return persistStore(new IndexPageStore(), ['castsResults', 'showResults', 'sortValue'], 'IndexPageStore');
-};
