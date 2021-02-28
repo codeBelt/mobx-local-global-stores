@@ -3,7 +3,7 @@ import { http } from '../../utils/http/http';
 import { ICast, IEpisode, IShow } from './shows.types';
 import { AxiosRequestCacheRequest } from '../../utils/http/http.types';
 
-export const getShowRequest = async (showId: string, cacheRequest: AxiosRequestCacheRequest) => {
+export const getShowRequest = async (showId: string, cacheRequest?: AxiosRequestCacheRequest) => {
   const endpoint: string = environment.api.shows.replace(':showId', showId);
 
   return http.get<IShow>(endpoint, {}, cacheRequest);

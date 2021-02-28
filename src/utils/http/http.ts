@@ -2,6 +2,12 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiResponse, IApiError } from './http.types';
 import { HttpVerbs } from './http.constants';
 import { cacheAdapterEnhancer } from 'axios-extensions';
+import environment from 'environment';
+
+if (environment.isDevelopment) {
+  // logger for cacheAdapterEnhancer
+  process.env.LOGGER_LEVEL = 'info';
+}
 
 const axiosWithCache = axios.create({
   adapter: cacheAdapterEnhancer(axios.defaults.adapter!, { enabledByDefault: false }),
