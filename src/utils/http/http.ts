@@ -3,6 +3,8 @@ import { ApiResponse, IApiError } from './http.types';
 import { HttpVerbs } from './http.constants';
 import { cacheAdapterEnhancer } from 'axios-extensions';
 import environment from 'environment';
+import LRUCache from 'lru-cache';
+import ms from 'milliseconds';
 
 if (environment.isDevelopment) {
   // logger for cacheAdapterEnhancer
@@ -10,7 +12,10 @@ if (environment.isDevelopment) {
 }
 
 const axiosWithCache = axios.create({
-  adapter: cacheAdapterEnhancer(axios.defaults.adapter!, { enabledByDefault: false }),
+  adapter: cacheAdapterEnhancer(axios.defaults.adapter!, {
+    enabledByDefault: true,
+    defaultCache: new LRUCache({ maxAge: ms.minutes(1) }),
+  }),
 });
 
 const httpRequest = async <T>(
