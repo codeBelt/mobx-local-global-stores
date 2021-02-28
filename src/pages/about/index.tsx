@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 interface IProps {}
 
 const AboutRoute: NextPage<IProps> = observer((props) => {
-  const [localStore] = useState(AboutPageStore());
+  const [localStore] = useState(() => AboutPageStore());
 
   useEffect(() => {
     localStore.init();
