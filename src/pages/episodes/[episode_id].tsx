@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const EpisodesRoute: NextPage<IProps> = observer((props) => {
-  const [localStore] = useState(new EpisodesPageStore(props.episodesResults));
+  const [localStore] = useState(() => new EpisodesPageStore(props.episodesResults));
 
   return (
     <LocalStoreProvider localStore={localStore}>
