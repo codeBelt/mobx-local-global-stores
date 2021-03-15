@@ -12,7 +12,7 @@ export const useLocalStore = <T extends unknown>(): T => {
   return value;
 };
 
-export interface IProps<T> {
+interface IProps<T> {
   localStore: T;
 }
 

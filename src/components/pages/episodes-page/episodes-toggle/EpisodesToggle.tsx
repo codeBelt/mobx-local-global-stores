@@ -5,7 +5,7 @@ import { EpisodesPageStore } from '../EpisodesPage.store';
 import { EpisodesToggleOption } from './EpisodesToggle.constants';
 import { observer } from 'mobx-react-lite';
 
-export interface IProps {}
+interface IProps {}
 
 export const EpisodesToggle: React.FC<IProps> = observer((props) => {
   const localStore = useLocalStore<EpisodesPageStore>();

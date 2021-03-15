@@ -38,7 +38,7 @@ export const useGlobalStore = (): GlobalStore => useContext(GlobalStoreContext);
 /**
  * Global Store Provider Component
  */
-export interface IProps {
+interface IProps {
   hydrationData?: Partial<GlobalStore>;
 }
 
