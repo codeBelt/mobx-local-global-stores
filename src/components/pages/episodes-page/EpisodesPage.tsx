@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { Container } from 'semantic-ui-react';
 import { EpisodesToggle } from './episodes-toggle/EpisodesToggle';
 
-export interface IProps {}
+interface IProps {}
 
 export const EpisodesPage: React.FC<IProps> = observer((props) => {
   const localStore = useLocalStore<EpisodesPageStore>();
