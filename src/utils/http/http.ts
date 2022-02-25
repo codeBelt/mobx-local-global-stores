@@ -24,7 +24,7 @@ const httpRequest = async <T>(
     const response: AxiosResponse<T> = await axios(requestConfig);
 
     return { data: response.data, statusCode: response.status };
-  } catch (error) {
+  } catch (error: any) {
     return {
       error: {
         message: error?.response?.data?.description,

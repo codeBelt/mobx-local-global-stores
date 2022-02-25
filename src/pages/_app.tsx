@@ -1,4 +1,4 @@
-import '../css/main.scss';
+import '../styles/main.scss';
 import 'nprogress/nprogress.css';
 
 import Router from 'next/router';

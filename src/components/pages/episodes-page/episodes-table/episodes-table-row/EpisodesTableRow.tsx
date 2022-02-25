@@ -10,7 +10,7 @@ export const EpisodesTableRow: React.FC<IProps> = (props) => {
   return (
     <Table.Row key={props.rowData.episode}>
       <Table.Cell>
-        <Image src={props.rowData.image} rounded={true} size="small" />
+        <Image src={props.rowData.image} rounded={true} size="small" alt={`${props.rowData.episode} screenshot`}/>
       </Table.Cell>
       <Table.Cell>{props.rowData.episode}</Table.Cell>
       <Table.Cell>{props.rowData.date}</Table.Cell>

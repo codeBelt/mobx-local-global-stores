@@ -5,7 +5,7 @@ import { VariantType } from 'notistack';
 
 export class ToastGlobalStore {
   readonly globalStore: GlobalStore;
-  notifications = ([] as unknown) as IObservableArray<IToastNotification>;
+  notifications = [] as unknown as IObservableArray<IToastNotification>;
 
   constructor(globalStore: GlobalStore) {
     this.globalStore = globalStore;

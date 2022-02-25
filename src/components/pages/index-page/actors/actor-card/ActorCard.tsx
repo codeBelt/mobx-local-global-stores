@@ -14,7 +14,7 @@ export const ActorCard: React.FC<IProps> = observer((props) => {
   return (
     <Card key={props.cardData.person.name}>
       <Card.Content>
-        <Image floated="right" size="mini" src={image || missingImage} />
+        <Image floated="right" size="mini" src={image || missingImage} alt={props.cardData.character.name}/>
         <Card.Header>{props.cardData.person.name}</Card.Header>
         <Card.Meta>as {props.cardData.character.name}</Card.Meta>
         <Card.Description>
