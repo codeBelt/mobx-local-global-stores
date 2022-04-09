@@ -42,7 +42,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "12.1.4",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "13.0.0",
+    "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "14.0.4",
     "@types/lodash.groupby": "4.6.6",
     "@types/lodash.orderby": "4.6.6",
