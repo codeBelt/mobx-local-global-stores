@@ -4,9 +4,12 @@ import { IEpisodeTableRow } from '../../../../../domains/shows/shows.types';
 
 interface IProps {
   readonly rowData: IEpisodeTableRow;
+  testId?: string;
 }
 
 export const EpisodesTableRow: React.FC<IProps> = (props) => {
+  const { testId = EpisodesTableRow.displayName } = props;
+
   return (
     <Table.Row key={props.rowData.episode}>
       <Table.Cell>
@@ -14,10 +17,9 @@ export const EpisodesTableRow: React.FC<IProps> = (props) => {
       </Table.Cell>
       <Table.Cell>{props.rowData.episode}</Table.Cell>
       <Table.Cell>{props.rowData.date}</Table.Cell>
-      <Table.Cell>{props.rowData.name}</Table.Cell>
+      <Table.Cell data-testid={`${testId}_name`}>{props.rowData.name}</Table.Cell>
     </Table.Row>
   );
 };
 
 EpisodesTableRow.displayName = 'EpisodesTableRow';
-EpisodesTableRow.defaultProps = {};
